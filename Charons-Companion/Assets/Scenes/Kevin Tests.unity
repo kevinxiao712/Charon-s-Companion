@@ -485,11 +485,16 @@ MonoBehaviour:
   jumpCooldown: 0.25
   airMultiplier: 0.2
   jumpKey: 32
+  chargeJumpKey: 304
   playerHeight: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
   orientation: {fileID: 1421270676}
+  maxHoldTime: 2
+  maxJumpForce: 20
+  jumpIndicator: {fileID: 0}
+  indicatorMaxScale: 2
 --- !u!1 &926561411
 GameObject:
   m_ObjectHideFlags: 0

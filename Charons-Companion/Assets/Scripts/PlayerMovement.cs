@@ -11,7 +11,10 @@ public class PlayerMovement : MonoBehaviour
     bool readyToJump;
 
 
+    [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode chargeJumpKey = KeyCode.LeftShift;
+
 
     [Header("GroundCheck")]
     public float playerHeight;
@@ -25,20 +28,34 @@ public class PlayerMovement : MonoBehaviour
     float verticalInput;
     Vector3 moveDirection;
 
+    [Header("Charged Jump Settings")]
+    public float maxHoldTime = 2f;       
+    public float maxJumpForce = 20f;     
+
+    private float holdTime = 0f;         
+    private bool isCharging = false;    
+
+    [Header("Jump Indicator")]
+    public GameObject jumpIndicator;    
+    public float indicatorMaxScale = 2f; 
+
 
 
 
     Rigidbody rb;
     private void FixedUpdate()
     {
-        MovePlayer();
+        if (!isCharging)
+        {
+            MovePlayer();
+        }
     }
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
-
+        
     }
 
     public void Update()
@@ -54,6 +71,30 @@ public class PlayerMovement : MonoBehaviour
 
         else
             rb.linearDamping = 0;
+
+        chargeJump();
+    }
+
+    public void chargeJump()
+    {
+        if (isCharging)
+        {
+            holdTime += Time.deltaTime;
+            holdTime = Mathf.Clamp(holdTime, 0f, maxHoldTime);
+
+            if (jumpIndicator != null)
+            {
+                jumpIndicator.SetActive(true);
+                float chargeRatio = holdTime / maxHoldTime;
+                float scaleValue = Mathf.Lerp(1f, indicatorMaxScale, chargeRatio);
+                jumpIndicator.transform.localScale = Vector3.one * scaleValue;
+            }
+        }
+        else
+        {
+            if (jumpIndicator != null)
+                jumpIndicator.SetActive(false);
+        }
     }
     private void MyInput()
     {
@@ -61,12 +102,44 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
         Debug.Log(readyToJump);
 
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        if (Input.GetKey(jumpKey) && !Input.GetKey(chargeJumpKey) && readyToJump && grounded)
         {
             readyToJump = false;
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
+
         }
+        if (Input.GetKeyDown(jumpKey) && Input.GetKey(chargeJumpKey) && readyToJump && grounded)
+        {
+            isCharging = true;
+            holdTime = 0f;
+        }
+
+
+        if (Input.GetKeyUp(jumpKey) && isCharging)
+        {
+            PerformChargedJump();
+        }
+    }
+    private void PerformChargedJump()
+    {
+        isCharging = false; 
+
+        float chargeRatio = holdTime / maxHoldTime;
+        float finalJumpForce = Mathf.Lerp(jumpforce, maxJumpForce, chargeRatio);
+
+
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+
+        rb.AddForce(transform.up * finalJumpForce, ForceMode.Impulse);
+
+
+        readyToJump = false;
+        Invoke(nameof(ResetJump), jumpCooldown);
+
+        if (jumpIndicator != null)
+            jumpIndicator.SetActive(false);
     }
 
     public void MovePlayer()
