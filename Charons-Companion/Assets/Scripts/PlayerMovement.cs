@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
@@ -30,15 +30,24 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Charged Jump Settings")]
     public float maxHoldTime = 2f;       
-    public float maxJumpForce = 20f;     
-
+    public float maxJumpForce = 20f;
+    public float horizontalBoost = 5f;
     private float holdTime = 0f;         
     private bool isCharging = false;    
 
     [Header("Jump Indicator")]
     public GameObject jumpIndicator;    
-    public float indicatorMaxScale = 2f; 
+    public float indicatorMaxScale = 2f;
 
+
+
+
+    public float fallVelocityThreshold = -10f; // threshold to consider it a "big fall"
+    public float stunDuration = 1f;            // how long to stun after a big fall
+
+    private bool isStunned = false;
+    private float maxFallSpeed = 0f;
+    private bool wasGrounded = true;
 
 
 
@@ -62,6 +71,30 @@ public class PlayerMovement : MonoBehaviour
     {
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+
+        if (!grounded)
+        {
+            // Record the worst (most negative) Y velocity while falling
+            if (rb.linearVelocity.y < maxFallSpeed)
+            {
+                maxFallSpeed = rb.linearVelocity.y;
+            }
+        }
+        else
+        {
+            // When we land (transition from not grounded to grounded)
+            if (!wasGrounded)
+            {
+                // Check if we exceeded the fall velocity threshold
+                if (maxFallSpeed < fallVelocityThreshold)
+                {
+                    StartCoroutine(ApplyFallStun(stunDuration));
+                }
+                // Reset for next fall
+                maxFallSpeed = 0f;
+            }
+        }
+        wasGrounded = grounded;
         MyInput();
         SpeedControl();
         if (grounded)
@@ -129,12 +162,15 @@ public class PlayerMovement : MonoBehaviour
         float finalJumpForce = Mathf.Lerp(jumpforce, maxJumpForce, chargeRatio);
 
 
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        Vector3 playerForward = transform.forward;
+        playerForward.y = 0f;           
+        playerForward.Normalize();
 
 
-        rb.AddForce(transform.up * finalJumpForce, ForceMode.Impulse);
 
+        rb.linearVelocity += playerForward * horizontalBoost;
 
+        rb.AddForce(Vector3.up * finalJumpForce, ForceMode.Impulse);
         readyToJump = false;
         Invoke(nameof(ResetJump), jumpCooldown);
 
@@ -172,5 +208,14 @@ public class PlayerMovement : MonoBehaviour
     {
         readyToJump = true;
 
+
+    }
+
+    private IEnumerator ApplyFallStun(float duration)
+    {
+        isStunned = true;
+        // Optionally you can do some animation or effects here
+        yield return new WaitForSeconds(duration);
+        isStunned = false;
     }
 }
