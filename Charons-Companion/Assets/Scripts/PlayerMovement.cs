@@ -3,7 +3,9 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public float MoveSpeed;
+    private float MoveSpeed;
+    public float walkSpeed;
+    public float sprintSpeed;
     public float groundDrag;
     public float jumpforce;
     public float jumpCooldown;
@@ -13,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
-    public KeyCode chargeJumpKey = KeyCode.LeftShift;
-
+    public KeyCode chargeJumpKey = KeyCode.LeftAlt;
+   public KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("GroundCheck")]
     public float playerHeight;
@@ -51,7 +53,20 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    [Header("Slope Hnadling")]
+    public float maxSlopeAngle;
+    private RaycastHit slopHit;
+    private bool exitingSlope;
+
     Rigidbody rb;
+    public MovementState state;
+
+    public enum MovementState
+    {
+        walking,
+        sprinting,
+        air
+    }
     private void FixedUpdate()
     {
         if (!isCharging)
@@ -97,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
         wasGrounded = grounded;
         MyInput();
         SpeedControl();
+        StateHandler();
         if (grounded)
         {
             rb.linearDamping = groundDrag;
@@ -156,21 +172,38 @@ public class PlayerMovement : MonoBehaviour
     }
     private void PerformChargedJump()
     {
-        isCharging = false; 
+        isCharging = false;
+
 
         float chargeRatio = holdTime / maxHoldTime;
         float finalJumpForce = Mathf.Lerp(jumpforce, maxJumpForce, chargeRatio);
 
 
-        Vector3 playerForward = transform.forward;
-        playerForward.y = 0f;           
-        playerForward.Normalize();
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
 
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
-        rb.linearVelocity += playerForward * horizontalBoost;
+
+        Vector3 jumpDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+
+        if (jumpDirection.sqrMagnitude < 0.01f)
+        {
+            jumpDirection = orientation.forward;
+        }
+
+
+        jumpDirection.y = 0f;
+        jumpDirection.Normalize();
+
+        float horizontalBoost = 5f; // adjust as needed
+        rb.linearVelocity += jumpDirection * horizontalBoost;
+
 
         rb.AddForce(Vector3.up * finalJumpForce, ForceMode.Impulse);
+
         readyToJump = false;
         Invoke(nameof(ResetJump), jumpCooldown);
 
@@ -181,34 +214,67 @@ public class PlayerMovement : MonoBehaviour
     public void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        if (OnSlope() && !exitingSlope)
+        {
+            rb.AddForce(GetSlopeMoveDirection() * MoveSpeed * 20f, ForceMode.Force);
+            if(rb.linearVelocity.y > 0)
+                rb.AddForce(Vector3.down * 80f , ForceMode.Force);
+        }
         if (grounded)
             rb.AddForce(moveDirection.normalized * MoveSpeed * 10f, ForceMode.Force);
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * MoveSpeed * 10f * airMultiplier, ForceMode.Force);
 
+        rb.useGravity = !OnSlope();
+
     }
 
     private void SpeedControl()
     {
-        Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        if (flatVel.magnitude > MoveSpeed)
+        if (OnSlope() && !exitingSlope)
         {
-            Vector3 limitedVel = flatVel.normalized * MoveSpeed;
-            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+            if (rb.linearVelocity.magnitude > MoveSpeed)
+                rb.linearVelocity = rb.linearVelocity.normalized * MoveSpeed;
+        }
+        else
+        {
+
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+            if (flatVel.magnitude > MoveSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * MoveSpeed;
+                rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+            }
         }
     }
 
     private void Jump()
     {
+        exitingSlope = true;
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(transform.up * jumpforce, ForceMode.Impulse);
     }
     private void ResetJump()
     {
         readyToJump = true;
+        exitingSlope = false;
 
+    }
 
+    private bool OnSlope()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down, out slopHit, playerHeight * 0.5f + 0.3f))
+        {
+            float angle = Vector3.Angle(Vector3.up, slopHit.normal);
+            return angle < maxSlopeAngle && angle != 0;
+        }
+        return false;
+    }
+    private Vector3 GetSlopeMoveDirection()
+    {
+        return Vector3.ProjectOnPlane(moveDirection, slopHit.normal).normalized;
     }
 
     private IEnumerator ApplyFallStun(float duration)
@@ -217,5 +283,22 @@ public class PlayerMovement : MonoBehaviour
         // Optionally you can do some animation or effects here
         yield return new WaitForSeconds(duration);
         isStunned = false;
+    }
+    private void StateHandler()
+    {
+        if(grounded && Input.GetKey(sprintKey))
+        {
+            state = MovementState.sprinting;
+            MoveSpeed = sprintSpeed;
+        }
+        else if(grounded)
+        {
+            state = MovementState.walking;
+            MoveSpeed= walkSpeed;
+        }
+        else
+        {
+            state = MovementState.air;
+        }
     }
 }
