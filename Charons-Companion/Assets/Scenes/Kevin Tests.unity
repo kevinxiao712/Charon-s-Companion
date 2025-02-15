@@ -260,17 +260,6 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 392059542418650222, guid: 2f7932c972e716647afd7feac917ed77, type: 3}
   m_PrefabInstance: {fileID: 6613132162437384716}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &756392390 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8980541267363575897, guid: 2f7932c972e716647afd7feac917ed77, type: 3}
-  m_PrefabInstance: {fileID: 6613132162437384716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 756392382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c515134c40a242f43862131c1b5ddf02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &756392391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,29 +272,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb158afe482b3974fb73e95b59716f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  sprintSpeed: 10
-  groundDrag: 5
-  jumpforce: 5
-  jumpCooldown: 0.25
-  airMultiplier: 0.2
-  jumpKey: 32
-  chargeJumpKey: 308
-  sprintKey: 304
-  playerHeight: 0.5
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 1024
-  orientation: {fileID: 1421270676}
-  maxHoldTime: 2
-  maxJumpForce: 20
-  horizontalBoost: 2
-  jumpIndicator: {fileID: 0}
-  indicatorMaxScale: 2
-  fallVelocityThreshold: -10
-  stunDuration: 1
-  maxSlopeAngle: 45
-  state: 0
+  player: {fileID: 0}
+  playerMovement: {fileID: 0}
+  clonePrefab: {fileID: 0}
+  cloneKey: 101
+  vcam: {fileID: 0}
 --- !u!1 &764096331
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,38 +790,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1421270675
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1421270676}
-  m_Layer: 0
-  m_Name: Orien
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1421270676
+--- !u!4 &1421270676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5535815724605911455, guid: 2f7932c972e716647afd7feac917ed77, type: 3}
   m_PrefabInstance: {fileID: 6613132162437384716}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1925465107 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 638315751700440996, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
-  m_PrefabInstance: {fileID: 8411636055065242739}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6613132162437384716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -995,7 +939,7 @@ SceneRoots:
   - {fileID: 1011695370}
   - {fileID: 458886017}
   - {fileID: 926561415}
-  - {fileID: 756392386}
-  - {fileID: 1925465108}
+  - {fileID: 6613132162437384716}
   - {fileID: 1154687938}
   - {fileID: 764096335}
+  - {fileID: 8411636055065242739}
