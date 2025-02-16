@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 740760076057121806}
   - component: {fileID: 7890027248270787709}
   - component: {fileID: 2166197710567705596}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,8 +123,8 @@ GameObject:
   - component: {fileID: 2116611070941172364}
   - component: {fileID: 392059542418650222}
   - component: {fileID: 8980541267363575897}
-  m_Layer: 0
-  m_Name: player test
+  m_Layer: 7
+  m_Name: Clone  Test
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,13 +239,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c515134c40a242f43862131c1b5ddf02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 7
+  walkSpeed: 5
+  sprintSpeed: 10
   groundDrag: 5
   jumpforce: 5
   jumpCooldown: 0.25
   airMultiplier: 0.2
   jumpKey: 32
-  chargeJumpKey: 304
+  chargeJumpKey: 9
+  sprintKey: 304
   playerHeight: 0.5
   whatIsGround:
     serializedVersion: 2
@@ -253,8 +255,13 @@ MonoBehaviour:
   orientation: {fileID: 5535815724605911455}
   maxHoldTime: 2
   maxJumpForce: 20
+  horizontalBoost: 5
   jumpIndicator: {fileID: 0}
   indicatorMaxScale: 2
+  fallVelocityThreshold: -10
+  stunDuration: 1
+  maxSlopeAngle: 45
+  state: 0
 --- !u!1 &3369446387584823978
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,8 +271,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5535815724605911455}
-  m_Layer: 0
-  m_Name: Orien
+  m_Layer: 7
+  m_Name: CloneOrien
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

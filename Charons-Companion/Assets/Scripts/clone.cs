@@ -4,28 +4,86 @@ using UnityEngine;
 public class clone : MonoBehaviour
 {
     [Header("References")]
-    public Transform player;                    // The main player transform
-    public PlayerMovement playerMovement;       // The main player's movement script
-    public GameObject clonePrefab;             // Prefab of the clone
-    public KeyCode cloneKey = KeyCode.E;       // The key to trigger clone logic
+    public Transform player;                  // The main player's Transform
+    public PlayerMovement playerMovement;     // The main player's movement script
+    public GameObject clonePrefab;           // Prefab for the clone
+    public CinemachineCamera vcam;    // Cinemachine Virtual Camera in the scene
 
-    private GameObject currentClone;           // Reference to the spawned clone
-    private PlayerMovement cloneMovement;      // Reference to the clone's movement script
+    [Header("Settings")]
+    public KeyCode toggleKey = KeyCode.E;    // Press to spawn/switch control
+    public KeyCode destroyKey = KeyCode.Q;
 
-    // Possible states
-    private bool controllingClone = false;     // Are we currently controlling the clone?
-    private bool cloneExists = false;     // Does a clone exist in the world?
-    [Header("Cinemachine")]
-    public CinemachineCamera vcam;
+    public TestController testController;
+
+
+
+    // Internal references
+    private GameObject currentClone;         // The currently spawned clone (if any)
+    private PlayerMovement cloneMovement;    // The clone's movement script (if any)
+    private bool controllingClone;           // True if we're currently controlling the clone
+    private bool cloneExists;                // True if a clone is currently spawned
+    private int playerCullingMask;
+    private int cloneCullingMask;
+
+
+
+    void Start()
+    {
+
+
+    }
+    void Awake()
+    {
+        playerCullingMask = LayerMask.GetMask("Default", "whatIsGround", "Player", "Clone");
+
+
+        cloneCullingMask = LayerMask.GetMask("Default", "Clone", "Player", "whatIsGround", "CloneVisible");
+
+        Camera mainCam = Camera.main;
+        if (mainCam != null)
+        {
+            mainCam.cullingMask = playerCullingMask;
+        }
+
+    }
     void Update()
     {
-        // Check if the user pressed our clone key
-        if (Input.GetKeyDown(cloneKey))
+        if (Input.GetKeyDown(toggleKey))
         {
-            HandleCloneLogic();
+            HandleToggle();
+        }
+
+        // Press Q to destroy the clone (if it exists)
+        if (Input.GetKeyDown(destroyKey))
+        {
+            if (cloneExists)
+            {
+                DestroyClone();
+            }
         }
     }
-
+    private void HandleToggle()
+    {
+        // If no clone, spawn it and immediately control
+        if (!cloneExists)
+        {
+            SpawnClone();
+        }
+        else
+        {
+            // We have a clone already.
+            if (controllingClone)
+            {
+                // If we're controlling the clone, switch back to the player
+                ReturnToPlayer();
+            }
+            else
+            {
+                // If we're controlling the player, switch to controlling the clone
+                ControlClone();
+            }
+        }
+    }
     private void HandleCloneLogic()
     {
         // CASE 1: No clone in the world => Spawn one & control it
@@ -51,60 +109,122 @@ public class clone : MonoBehaviour
 
 
     }
-
-    // -------------------------------------------------------------------
-    // 1) Spawn a clone, switch control to the clone
-    private void SpawnClone()
+    private void ControlClone()
     {
-        // Instantiate clone at player position/rotation
-        currentClone = Instantiate(clonePrefab, player.position, player.rotation);
-        cloneExists = true;
+        if (!cloneExists || currentClone == null) return;
+
+        // Disable player movement, enable clone movement
+        playerMovement.enabled = false;
+        cloneMovement.enabled = true;
+
+        controllingClone = true;
+        if (testController != null)
+        {
+            Transform cloneOrientation = currentClone.transform.Find("CloneOrien");
+            Transform cloneModel = currentClone.transform.Find("PlayerObj");
+
+            testController.orientation = cloneOrientation;
+            testController.player = currentClone.transform;
+            testController.playerObj = cloneModel;
+        }
+
+        // Switch camera to clone
         if (vcam != null)
         {
             vcam.Follow = currentClone.transform;
             vcam.LookAt = currentClone.transform;
         }
-        // Get the clone's movement script
+
+        Camera.main.cullingMask = cloneCullingMask;
+        Camera mainCamera = Camera.main;
+    }
+
+
+    private void SpawnClone()
+    {
+        currentClone = Instantiate(clonePrefab, player.position, player.rotation);
+        cloneExists = true;
+
         cloneMovement = currentClone.GetComponent<PlayerMovement>();
 
-        // Switch control: disable player's movement, enable clone's
+        // Immediately control the clone
         playerMovement.enabled = false;
         cloneMovement.enabled = true;
-
         controllingClone = true;
+
+        Transform cloneOrientation = currentClone.transform.Find("CloneOrien");
+        Transform cloneModel = currentClone.transform.Find("PlayerObj");
+
+        // Assign them to the TestController
+        if (testController != null)
+        {
+            testController.orientation = cloneOrientation;
+            testController.player = currentClone.transform;
+            testController.playerObj = cloneModel;
+        }
+
+        // Switch camera to the clone
+        if (vcam != null && currentClone != null)
+        {
+            vcam.Follow = currentClone.transform;
+            vcam.LookAt = currentClone.transform;
+        }
+        Camera.main.cullingMask = cloneCullingMask;
+        Camera mainCamera = Camera.main;
     }
 
-    // -------------------------------------------------------------------
-    // 2) Return to the player, but leave the clone in the scene
+
     private void ReturnToPlayer()
     {
-        // Disable clone's movement
+        // Disable clone movement, enable player
         if (cloneMovement != null)
             cloneMovement.enabled = false;
-
-        // Enable player's movement
         playerMovement.enabled = true;
-        if (vcam != null)
-        {
-            vcam.Follow = player;  // or player.transform
-            vcam.LookAt = player;  // or player.transform
-        }
+
         controllingClone = false;
+        if (testController != null && player != null)
+        {
+            testController.player = player;
+            testController.playerObj = player;
+        }
+        // Switch camera to player
+        if (vcam != null && player != null)
+        {
+            vcam.Follow = player;     // Or player.transform
+            vcam.LookAt = player;     // Or player.transform
+        }
+        Camera mainCam = Camera.main;
+        mainCam.cullingMask = playerCullingMask;
     }
 
-    // -------------------------------------------------------------------
-    // 3) Destroy the clone, free references
+
     private void DestroyClone()
     {
-        if (currentClone != null)
-            Destroy(currentClone);
 
+        if (controllingClone)
+        {
+            ReturnToPlayer();
+        }
+
+        if (currentClone)
+        {
+            Destroy(currentClone);
+        }
+
+        // Clear references
         currentClone = null;
         cloneMovement = null;
         cloneExists = false;
         controllingClone = false;
 
-        // Ensure player is still enabled
-        playerMovement.enabled = true;
+        if (playerMovement != null)
+            playerMovement.enabled = true;
+
+        if (vcam != null && player != null)
+        {
+            vcam.Follow = player;
+            vcam.LookAt = player;
+        }
     }
+
 }
