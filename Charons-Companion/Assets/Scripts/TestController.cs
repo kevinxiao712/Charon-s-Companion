@@ -29,6 +29,9 @@ public class TestController : MonoBehaviour
         Vector3 camForward = transform.forward;
         camForward.y = 0f;
         camForward.Normalize();
+        // Pre-calculate the bitmask for each "view mode"
+        int playerViewMask = LayerMask.GetMask("Default", "Player");
+        int cloneViewMask = LayerMask.GetMask("Default", "Clone");
 
         orientation.forward = camForward;
 

@@ -22,7 +22,30 @@ public class clone : MonoBehaviour
     private PlayerMovement cloneMovement;    // The clone's movement script (if any)
     private bool controllingClone;           // True if we're currently controlling the clone
     private bool cloneExists;                // True if a clone is currently spawned
+    private int playerCullingMask;
+    private int cloneCullingMask;
 
+
+
+    void Start()
+    {
+
+
+    }
+    void Awake()
+    {
+        playerCullingMask = LayerMask.GetMask("Default", "whatIsGround", "Player", "Clone");
+
+
+        cloneCullingMask = LayerMask.GetMask("Default", "Clone", "Player", "whatIsGround", "CloneVisible");
+
+        Camera mainCam = Camera.main;
+        if (mainCam != null)
+        {
+            mainCam.cullingMask = playerCullingMask;
+        }
+
+    }
     void Update()
     {
         if (Input.GetKeyDown(toggleKey))
@@ -111,7 +134,11 @@ public class clone : MonoBehaviour
             vcam.Follow = currentClone.transform;
             vcam.LookAt = currentClone.transform;
         }
+
+        Camera.main.cullingMask = cloneCullingMask;
+        Camera mainCamera = Camera.main;
     }
+
 
     private void SpawnClone()
     {
@@ -142,6 +169,8 @@ public class clone : MonoBehaviour
             vcam.Follow = currentClone.transform;
             vcam.LookAt = currentClone.transform;
         }
+        Camera.main.cullingMask = cloneCullingMask;
+        Camera mainCamera = Camera.main;
     }
 
 
@@ -164,6 +193,8 @@ public class clone : MonoBehaviour
             vcam.Follow = player;     // Or player.transform
             vcam.LookAt = player;     // Or player.transform
         }
+        Camera mainCam = Camera.main;
+        mainCam.cullingMask = playerCullingMask;
     }
 
 
