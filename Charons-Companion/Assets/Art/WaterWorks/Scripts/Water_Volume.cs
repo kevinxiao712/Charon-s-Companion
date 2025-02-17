@@ -10,15 +10,15 @@ public class Water_Volume : ScriptableRendererFeature
 
         private Material _material;
 
-        private RenderTargetHandle tempRenderTarget;
-        private RenderTargetHandle tempRenderTarget2;
+        //private RenderTargetHandle tempRenderTarget;
+        //private RenderTargetHandle tempRenderTarget2;
 
         public CustomRenderPass(Material mat)
         {
             _material = mat;
 
-            tempRenderTarget.Init("_TemporaryColourTexture");
-            tempRenderTarget2.Init("_TemporaryDepthTexture");
+            //tempRenderTarget.Init("_TemporaryColourTexture");
+            //tempRenderTarget2.Init("_TemporaryDepthTexture");
         }
 
         // This method is called before executing the render pass.
@@ -41,9 +41,9 @@ public class Water_Volume : ScriptableRendererFeature
             {
                 CommandBuffer commandBuffer = CommandBufferPool.Get();
 
-                commandBuffer.GetTemporaryRT(tempRenderTarget.id, renderingData.cameraData.cameraTargetDescriptor);
-                Blit(commandBuffer, source, tempRenderTarget.Identifier(), _material);
-                Blit(commandBuffer, tempRenderTarget.Identifier(), source);
+                //commandBuffer.GetTemporaryRT(tempRenderTarget.id, renderingData.cameraData.cameraTargetDescriptor);
+                //Blit(commandBuffer, source, tempRenderTarget.Identifier(), _material);
+                //Blit(commandBuffer, tempRenderTarget.Identifier(), source);
 
                 context.ExecuteCommandBuffer(commandBuffer);
                 CommandBufferPool.Release(commandBuffer);
@@ -86,7 +86,7 @@ public class Water_Volume : ScriptableRendererFeature
     // This method is called when setting up the renderer once per-camera.
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {       
-        m_ScriptablePass.source = renderer.cameraColorTarget;
+        //m_ScriptablePass.source = renderer.cameraColorTarget;
         renderer.EnqueuePass(m_ScriptablePass);
     }
 }

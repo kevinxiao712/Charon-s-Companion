@@ -1488,8 +1488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c515134c40a242f43862131c1b5ddf02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 0
-  sprintSpeed: 0
+  walkSpeed: 5
+  sprintSpeed: 5
   groundDrag: 5
   jumpforce: 5
   jumpCooldown: 0.25
@@ -1525,6 +1525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InteractorSource: {fileID: 1011695370}
   InteractorRange: 200
+  orienTransform: {fileID: 1421270676}
 --- !u!1 &809452560
 GameObject:
   m_ObjectHideFlags: 0
@@ -2795,6 +2796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 233fa3cfa33332540b1fc59470db3ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogue: {fileID: 607198157}
 --- !u!65 &1327085986
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3466,7 +3468,7 @@ GameObject:
   - component: {fileID: 1678148402}
   - component: {fileID: 1678148401}
   - component: {fileID: 1678148400}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
