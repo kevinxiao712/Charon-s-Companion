@@ -1488,8 +1488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c515134c40a242f43862131c1b5ddf02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  sprintSpeed: 5
+  walkSpeed: 7
+  sprintSpeed: 10
   groundDrag: 5
   jumpforce: 5
   jumpCooldown: 0.25
@@ -1939,8 +1939,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011695367}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2534013, y: 0.000000027186013, z: -0.000000007121405, w: 0.9673613}
-  m_LocalPosition: {x: 875.73944, y: 2.94, z: 910.75}
+  m_LocalRotation: {x: 0.15487324, y: -8.4121886e-16, z: 1.3187342e-16, w: 0.98793435}
+  m_LocalPosition: {x: 875.73944, y: 2.94, z: 907.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3947,10 +3947,10 @@ MonoBehaviour:
   Radius: 5
   Orbits:
     Top:
-      Radius: 2
+      Radius: 3
       Height: 5
     Center:
-      Radius: 4
+      Radius: 7
       Height: 2.25
     Bottom:
       Radius: 2.5
@@ -4038,8 +4038,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925465102}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2534013, y: 0.000000027186012, z: -0.0000000071214044, w: 0.9673613}
-  m_LocalPosition: {x: 875.73944, y: 2.94, z: 910.75}
+  m_LocalRotation: {x: 0.15487324, y: -8.6699884e-16, z: 2.9632333e-16, w: 0.98793435}
+  m_LocalPosition: {x: 875.73944, y: 2.94, z: 907.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
