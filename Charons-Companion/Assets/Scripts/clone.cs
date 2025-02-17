@@ -8,6 +8,8 @@ public class clone : MonoBehaviour
     public PlayerMovement playerMovement;     // The main player's movement script
     public GameObject clonePrefab;           // Prefab for the clone
     public CinemachineCamera vcam;    // Cinemachine Virtual Camera in the scene
+    public Transform playerOrientation;   // assign via Inspector
+    public Transform playerModel;         
 
     [Header("Settings")]
     public KeyCode toggleKey = KeyCode.E;    // Press to spawn/switch control
@@ -187,6 +189,12 @@ public class clone : MonoBehaviour
             testController.player = player;
             testController.playerObj = player;
         }
+
+        testController.orientation = playerOrientation;
+        testController.player = player;
+        testController.playerObj = playerModel;
+
+
         // Switch camera to player
         if (vcam != null && player != null)
         {
