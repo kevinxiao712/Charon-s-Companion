@@ -86,7 +86,8 @@ public class PlayerMovement : MonoBehaviour
     {
 
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
+        Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f), Color.red);
+        Debug.Log(grounded);
         if (!grounded)
         {
             // Record the worst (most negative) Y velocity while falling
