@@ -63,7 +63,7 @@ public class Interactor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             Vector3 rayOrigin = transform.position;
             Vector3 direction = orienTransform.forward;
