@@ -25,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    [Header("Coyote Time")]
+    public float coyoteTime = 0.2f;          // Duration to still allow jumping after stepping off
+    private float coyoteTimeCounter;
+
+
     public Transform orientation;
     float horizontalInput;
     float verticalInput;
@@ -85,9 +90,41 @@ public class PlayerMovement : MonoBehaviour
     public void Update()
     {
 
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit groundHit, playerHeight * 0.5f + 0.2f, whatIsGround))
+        {
+            float angle = Vector3.Angle(Vector3.up, groundHit.normal);
+            if (angle < maxSlopeAngle)
+            {
+                grounded = true;
+            }
+            else
+            {
+                grounded = false;
+            }
+        }
+        else
+        {
+            grounded = false;
+        }
+
         Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f), Color.red);
         Debug.Log(grounded);
+
+
+
+
+        if (grounded)
+        {
+            // Reset coyote time
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            // Decrease coyote time if not grounded
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+
         if (!grounded)
         {
             // Record the worst (most negative) Y velocity while falling
@@ -98,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            // When we land (transition from not grounded to grounded)
+
             if (!wasGrounded)
             {
                 // Check if we exceeded the fall velocity threshold
@@ -152,17 +189,19 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
         Debug.Log(readyToJump);
 
-        if (Input.GetKey(jumpKey) && !Input.GetKey(chargeJumpKey) && readyToJump && grounded)
+        if (Input.GetKeyDown(jumpKey) && !Input.GetKey(chargeJumpKey) && readyToJump && (grounded || coyoteTimeCounter > 0f))
         {
             readyToJump = false;
             Jump();
+            coyoteTimeCounter = 0f;
             Invoke(nameof(ResetJump), jumpCooldown);
 
         }
-        if (Input.GetKeyDown(jumpKey) && Input.GetKey(chargeJumpKey) && readyToJump && grounded)
+        if (Input.GetKeyDown(jumpKey) && Input.GetKey(chargeJumpKey) && readyToJump && (grounded || coyoteTimeCounter > 0f))
         {
             isCharging = true;
             holdTime = 0f;
+            coyoteTimeCounter = 0f;
         }
 
 
@@ -226,7 +265,7 @@ public class PlayerMovement : MonoBehaviour
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * MoveSpeed * 10f * airMultiplier, ForceMode.Force);
 
-        rb.useGravity = !OnSlope();
+       // rb.useGravity = !OnSlope();
 
     }
 

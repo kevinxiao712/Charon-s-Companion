@@ -1080,6 +1080,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: FreeLook Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: Orbits.Bottom.Height
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: Orbits.Bottom.Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: Orbits.SplineCurvature
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.z
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6816905487276677128, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
       propertyPath: rb
       value: 
