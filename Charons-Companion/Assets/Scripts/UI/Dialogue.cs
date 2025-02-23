@@ -17,13 +17,13 @@ public class Dialogue : MonoBehaviour
     void Start()
     {
         textDisplay.text = string.Empty;
-        StartDialogue();
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && gameObject.activeSelf)
         {
             if (textDisplay.text == sentences[index])
             {
@@ -38,9 +38,12 @@ public class Dialogue : MonoBehaviour
 
     }
 
-    void StartDialogue()
+    public void StartDialogue()
     {
+        Debug.Log("Dialogue started!");
+        gameObject.SetActive(true);
         index = 0;
+        textDisplay.text = string.Empty;
         StartCoroutine(TypeLine());
     }
 

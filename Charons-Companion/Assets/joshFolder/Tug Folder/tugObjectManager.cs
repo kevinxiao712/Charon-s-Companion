@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
-using static Unity.VisualScripting.Metadata;
+//using static Unity.VisualScripting.Metadata;
 
 public class tugObjectManager : MonoBehaviour
 {
@@ -26,12 +26,12 @@ public class tugObjectManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Pull the closest object.
-    /// DISCLAIMER: THIS MECHANIC IS IN TESTING, THIS SHOULD PULL THE CLOSEST OBJECT NOT ALL OBJECTS.
-    /// </summary>
-    void tugThis()
-    {
+    ///// <summary>
+    ///// Pull the closest object.
+    ///// DISCLAIMER: THIS MECHANIC IS IN TESTING, THIS SHOULD PULL THE CLOSEST OBJECT NOT ALL OBJECTS.
+    ///// </summary>
+    //void tugThis()
+    //{
 
-    }
+    //}
 }
