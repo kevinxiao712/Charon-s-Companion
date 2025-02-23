@@ -952,6 +952,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 02d81a5403ba45d4b8548ec8475c770b, type: 2}
+    - target: {fileID: 2166197710567705596, guid: 2f7932c972e716647afd7feac917ed77, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: c637b16e30cb3054585a40588f356e28, type: 2}
     - target: {fileID: 2200200711050157524, guid: 2f7932c972e716647afd7feac917ed77, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.30343294
@@ -1079,6 +1083,30 @@ PrefabInstance:
     - target: {fileID: 3987375186775927591, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
       propertyPath: m_Name
       value: FreeLook Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: Orbits.Bottom.Height
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: Orbits.Bottom.Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: Orbits.SplineCurvature
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: TrackerSettings.PositionDamping.z
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6816905487276677128, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
       propertyPath: rb
