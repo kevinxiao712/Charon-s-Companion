@@ -23,7 +23,7 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && gameObject.activeSelf)
+        if (Input.GetKeyDown(KeyCode.F) && gameObject.activeSelf)
         {
             if (textDisplay.text == sentences[index])
             {
