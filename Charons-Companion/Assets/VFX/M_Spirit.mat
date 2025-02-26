@@ -39,13 +39,18 @@ Material:
     m_Ints: []
     m_Floats:
     - _Fresnelpower: 1
-    - _InteriorSpread: 1.13
+    - _InteriorSpread: 0.75
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _WobbleAmount: 0.01
+    - _WobbleDistance: 0.05
+    - _WobbleFrequency: 2
+    - _WobbleSpeed: 0.05
     m_Colors:
     - _FresnelColor: {r: 0.0043609934, g: 0.25613314, b: 0.92452836, a: 0}
-    - _InteriorColor: {r: 0.7086516, g: 0.6645725, b: 3.338536, a: 0}
+    - _InteriorColor: {r: 0.1771629, g: 0.16614312, b: 0.834634, a: 0}
     - _InteriorPos: {r: 0, g: 0, b: 0, a: 0}
+    - _Vector3: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &4215958799443332954
