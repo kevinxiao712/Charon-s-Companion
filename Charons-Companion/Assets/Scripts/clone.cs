@@ -144,7 +144,9 @@ public class clone : MonoBehaviour
 
     private void SpawnClone()
     {
-        currentClone = Instantiate(clonePrefab, player.position, player.rotation);
+        float behindDistance = 0.25f;
+        Vector3 spawnPosition = player.position - player.forward * behindDistance;
+        currentClone = Instantiate(clonePrefab, spawnPosition, player.rotation);
         cloneExists = true;
 
         cloneMovement = currentClone.GetComponent<PlayerMovement>();

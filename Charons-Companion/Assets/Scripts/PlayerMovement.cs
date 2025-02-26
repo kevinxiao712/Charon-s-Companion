@@ -108,8 +108,8 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
 
-        Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f), Color.red);
-        Debug.Log(grounded);
+     //   Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f), Color.red);
+    //   Debug.Log(grounded);
 
 
 
@@ -188,7 +188,7 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        Debug.Log(readyToJump);
+     //   Debug.Log(readyToJump);
         bool isMovingInput = (Mathf.Abs(horizontalInput) > 0.01f || Mathf.Abs(verticalInput) > 0.01f);
 
 

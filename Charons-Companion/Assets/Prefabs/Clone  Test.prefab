@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2166197710567705596}
   m_Layer: 7
   m_Name: PlayerObj
-  m_TagString: Untagged
+  m_TagString: Clone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2378784941023767814}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c637b16e30cb3054585a40588f356e28, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 8980541267363575897}
   m_Layer: 7
   m_Name: Clone  Test
-  m_TagString: Player
+  m_TagString: Clone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -246,16 +246,17 @@ MonoBehaviour:
   jumpCooldown: 0.25
   airMultiplier: 0.2
   jumpKey: 32
-  chargeJumpKey: 9
   sprintKey: 304
   playerHeight: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1536
+  coyoteTime: 0.2
   orientation: {fileID: 5535815724605911455}
   maxHoldTime: 2
   maxJumpForce: 20
   horizontalBoost: 5
+  chargeTapThreshold: 0.2
   jumpIndicator: {fileID: 0}
   indicatorMaxScale: 2
   fallVelocityThreshold: -10
@@ -273,7 +274,7 @@ GameObject:
   - component: {fileID: 5535815724605911455}
   m_Layer: 7
   m_Name: CloneOrien
-  m_TagString: Untagged
+  m_TagString: Clone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
