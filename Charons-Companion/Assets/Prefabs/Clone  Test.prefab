@@ -240,9 +240,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 5
-  sprintSpeed: 10
+  sprintSpeed: 8
   groundDrag: 5
-  jumpforce: 5
+  jumpforce: 6
   jumpCooldown: 0.25
   airMultiplier: 0.2
   jumpKey: 32
@@ -254,7 +254,7 @@ MonoBehaviour:
   coyoteTime: 0.2
   orientation: {fileID: 5535815724605911455}
   maxHoldTime: 2
-  maxJumpForce: 20
+  maxJumpForce: 10
   horizontalBoost: 5
   chargeTapThreshold: 0.2
   jumpIndicator: {fileID: 0}
