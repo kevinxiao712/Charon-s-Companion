@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using System.Collections;
 
 public class clone : MonoBehaviour
 {
@@ -26,12 +27,12 @@ public class clone : MonoBehaviour
     private bool cloneExists;                // True if a clone is currently spawned
     private int playerCullingMask;
     private int cloneCullingMask;
-
+    private CinemachineDeoccluder cinemachineCollider;
 
 
     void Start()
     {
-
+        cinemachineCollider = vcam.GetComponent<CinemachineDeoccluder>();
 
     }
     void Awake()
@@ -133,8 +134,9 @@ public class clone : MonoBehaviour
         // Switch camera to clone
         if (vcam != null)
         {
-            vcam.Follow = currentClone.transform;
-            vcam.LookAt = currentClone.transform;
+            //vcam.Follow = currentClone.transform;
+            //vcam.LookAt = currentClone.transform;
+            StartCoroutine(SwitchCameraTarget(currentClone.transform));
         }
 
         Camera.main.cullingMask = cloneCullingMask;
@@ -170,8 +172,9 @@ public class clone : MonoBehaviour
         // Switch camera to the clone
         if (vcam != null && currentClone != null)
         {
-            vcam.Follow = currentClone.transform;
-            vcam.LookAt = currentClone.transform;
+            //vcam.Follow = currentClone.transform;
+            //vcam.LookAt = currentClone.transform;
+            StartCoroutine(SwitchCameraTarget(currentClone.transform));
         }
         Camera.main.cullingMask = cloneCullingMask;
         Camera mainCamera = Camera.main;
@@ -200,8 +203,10 @@ public class clone : MonoBehaviour
         // Switch camera to player
         if (vcam != null && player != null)
         {
-            vcam.Follow = player;     // Or player.transform
-            vcam.LookAt = player;     // Or player.transform
+            //vcam.Follow = player;     
+            //vcam.LookAt = player;    
+            StartCoroutine(SwitchCameraTarget(player));
+
         }
         Camera mainCam = Camera.main;
         mainCam.cullingMask = playerCullingMask;
@@ -232,9 +237,38 @@ public class clone : MonoBehaviour
 
         if (vcam != null && player != null)
         {
-            vcam.Follow = player;
-            vcam.LookAt = player;
+            //vcam.Follow = player;
+            //vcam.LookAt = player;
+            StartCoroutine(SwitchCameraTarget(player));
+
         }
     }
+
+    private IEnumerator SwitchCameraTarget(Transform newTarget)
+    {
+        if (cinemachineCollider != null)
+        {
+            // Disable Deoccluder temporarily
+            cinemachineCollider.enabled = false;
+        }
+
+        // Set null first to avoid abrupt snapping
+        vcam.Follow = null;
+        vcam.LookAt = null;
+
+        yield return new WaitForSeconds(0.1f); // Small delay before applying the new target
+
+        vcam.Follow = newTarget;
+        vcam.LookAt = newTarget;
+
+        yield return new WaitForSeconds(0.3f); // Allow some time for the camera to reposition
+
+        if (cinemachineCollider != null)
+        {
+            // Re-enable Deoccluder after transition
+            cinemachineCollider.enabled = true;
+        }
+    }
+
 
 }
