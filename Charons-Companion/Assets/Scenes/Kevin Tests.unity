@@ -1077,7 +1077,7 @@ Transform:
   m_GameObject: {fileID: 1154687934}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.717, y: 0.56, z: -0.219}
+  m_LocalPosition: {x: 2.717, y: 0.49, z: -0.219}
   m_LocalScale: {x: 3.1112, y: 1, z: 4.0696}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1484,6 +1484,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5400893439042362563, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
       propertyPath: TrackerSettings.PositionDamping.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673804621829337623, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: AvoidObstacles.Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673804621829337623, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: MinimumDistanceFromTarget
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673804621829337623, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
+      propertyPath: AvoidObstacles.CameraRadius
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6816905487276677128, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
