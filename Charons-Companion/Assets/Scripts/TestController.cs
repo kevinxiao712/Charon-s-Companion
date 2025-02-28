@@ -17,7 +17,8 @@ public class TestController : MonoBehaviour
 
     public void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void LateUpdate()
     {
