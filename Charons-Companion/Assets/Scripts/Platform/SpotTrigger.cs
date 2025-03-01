@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SpotTrigger : MonoBehaviour
 {
-
     public PlatformSpawner manager;  // Assign in the Inspector
+    public GameObject instructionText; // Drag the instruction text here in the Inspector
 
     private Collider myCollider;
 
@@ -11,43 +11,33 @@ public class SpotTrigger : MonoBehaviour
     {
         myCollider = GetComponent<Collider>();
         myCollider.isTrigger = true;
-    }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    // If a Player or Clone enters, notify the manager
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        manager.SetOccupant(myCollider, "Player");
-    //    }
-    //    else if (other.CompareTag("Clone"))
-    //    {
-    //        manager.SetOccupant(myCollider, "Clone");
-    //    }
-    //}
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    // If a Player or Clone exits, clear occupant
-    //    if (other.CompareTag("Player") || other.CompareTag("Clone"))
-    //    {
-    //        manager.ClearOccupant(myCollider);
-    //    }
-    //}
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
+
+        if (instructionText != null)
         {
-            manager.SetOccupant(myCollider, "Player");
-        }
-        else if (other.CompareTag("Clone"))
-        {
-            manager.SetOccupant(myCollider, "Clone");
+            instructionText.SetActive(false); // Make sure it's off by default
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerStay(Collider other)
     {
-        
+        if (other.CompareTag("Player") || other.CompareTag("Clone"))
+        {
+            manager.SetOccupant(myCollider, other.CompareTag("Player") ? "Player" : "Clone");
+            if (instructionText != null)
+            {
+                instructionText.SetActive(true); // Enable the text when player is inside
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") || other.CompareTag("Clone"))
+        {
+            if (instructionText != null)
+            {
+                instructionText.SetActive(false); // Disable the text when player leaves
+            }
+        }
     }
 }
