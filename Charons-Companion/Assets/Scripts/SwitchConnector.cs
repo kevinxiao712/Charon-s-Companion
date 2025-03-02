@@ -1,15 +1,18 @@
 using UnityEngine;
+using System.Collections;
 
 public class Door : MonoBehaviour
 {
-    private Vector3 openPosition;
-    private Vector3 closedPosition;
+    [Header("Door Positions")]
+    public Transform openPositionTransform; // Empty GameObject that marks the 'open' position
+    private Vector3 closedPosition;         
+
     private bool isOpen = false;
 
-    void Start()
+    private void Start()
     {
+        // Remember the door's position when the game starts as the closed position
         closedPosition = transform.position;
-        openPosition = transform.position + new Vector3(0, 3, 0); // Move up when opening
     }
 
     public void Activate()
@@ -18,7 +21,7 @@ public class Door : MonoBehaviour
         {
             isOpen = true;
             StopAllCoroutines();
-            StartCoroutine(MoveDoor(openPosition));
+            StartCoroutine(MoveDoor(openPositionTransform.position));
         }
     }
 
@@ -28,20 +31,27 @@ public class Door : MonoBehaviour
         {
             isOpen = false;
             StopAllCoroutines();
+
             StartCoroutine(MoveDoor(closedPosition));
         }
     }
 
-    private System.Collections.IEnumerator MoveDoor(Vector3 target)
+
+    private IEnumerator MoveDoor(Vector3 targetPosition)
     {
-        float time = 0;
+        float time = 0f;
         Vector3 startPos = transform.position;
-        while (time < 1)
+        float duration = 1f;  
+
+        while (time < duration)
         {
-            transform.position = Vector3.Lerp(startPos, target, time);
             time += Time.deltaTime;
+            float t = time / duration;
+
+            // Smoothly interpolate between current and target
+            transform.position = Vector3.Lerp(startPos, targetPosition, t);
             yield return null;
         }
-        transform.position = target;
+        transform.position = targetPosition;
     }
 }
