@@ -5807,7 +5807,7 @@ TerrainCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: 7dda04c182731c34aaa8131610d13087, type: 2}
-  m_EnableTreeColliders: 1
+  m_EnableTreeColliders: 0
 --- !u!218 &932928268
 Terrain:
   m_ObjectHideFlags: 0
@@ -6346,13 +6346,43 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77fb6c9306fb6fe45a6da717d0e5ca1b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1001957093}
   m_SourcePrefab: {fileID: 100100000, guid: 77fb6c9306fb6fe45a6da717d0e5ca1b, type: 3}
 --- !u!4 &1001957091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 77fb6c9306fb6fe45a6da717d0e5ca1b, type: 3}
   m_PrefabInstance: {fileID: 1001957090}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1001957092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 77fb6c9306fb6fe45a6da717d0e5ca1b, type: 3}
+  m_PrefabInstance: {fileID: 1001957090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1001957093
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001957092}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7759331768739107841, guid: 77fb6c9306fb6fe45a6da717d0e5ca1b, type: 3}
 --- !u!1001 &1019978493
 PrefabInstance:
   m_ObjectHideFlags: 0
