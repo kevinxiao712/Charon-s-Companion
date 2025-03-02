@@ -1,57 +1,54 @@
 using UnityEngine;
-using System.Collections;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Door : MonoBehaviour
 {
-    [Header("Door Positions")]
-    public Transform openPositionTransform; // Empty GameObject that marks the 'open' position
-    private Vector3 closedPosition;         
+    public float moveSpeed = 1f;
+    public Transform openTransform;  // empty object defining open position
+    public Transform closedTransform;
 
-    private bool isOpen = false;
+    private Rigidbody rb;
+    private bool isOpen;
 
-    private void Start()
+    private void Awake()
     {
-        // Remember the door's position when the game starts as the closed position
-        closedPosition = transform.position;
+        rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;  // So it doesn't get forced around by physics
     }
 
     public void Activate()
     {
-        if (!isOpen)
-        {
-            isOpen = true;
-            StopAllCoroutines();
-            StartCoroutine(MoveDoor(openPositionTransform.position));
-        }
+        isOpen = true;
+        StopAllCoroutines();
+        StartCoroutine(MoveDoor(openTransform.position));
     }
 
     public void Deactivate()
     {
-        if (isOpen)
-        {
-            isOpen = false;
-            StopAllCoroutines();
-
-            StartCoroutine(MoveDoor(closedPosition));
-        }
+        isOpen = false;
+        StopAllCoroutines();
+        StartCoroutine(MoveDoor(closedTransform.position));
     }
 
-
-    private IEnumerator MoveDoor(Vector3 targetPosition)
+    private System.Collections.IEnumerator MoveDoor(Vector3 targetPos)
     {
+        Vector3 startPos = rb.position;
         float time = 0f;
-        Vector3 startPos = transform.position;
-        float duration = 1f;  
+        float duration = 1f;  // adjust as needed
 
         while (time < duration)
         {
             time += Time.deltaTime;
             float t = time / duration;
+            Vector3 newPos = Vector3.Lerp(startPos, targetPos, t);
 
-            // Smoothly interpolate between current and target
-            transform.position = Vector3.Lerp(startPos, targetPosition, t);
+            // Use MovePosition in FixedUpdate or mimic it properly:
+            rb.MovePosition(newPos);
+
             yield return null;
         }
-        transform.position = targetPosition;
+
+        // Ensure final position is exact:
+        rb.MovePosition(targetPos);
     }
 }
