@@ -768,7 +768,6 @@ GameObject:
   - component: {fileID: 1011695368}
   - component: {fileID: 1011695372}
   - component: {fileID: 1011695371}
-  - component: {fileID: 1011695373}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -926,23 +925,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!114 &1011695373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011695367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5820b40af8e99d745ad903d5e819b995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  orientation: {fileID: 1421270676}
-  player: {fileID: 756392386}
-  playerObj: {fileID: 623344399}
-  rb: {fileID: 756392389}
-  rotationSpeed: 10
 --- !u!114 &1105256106 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6419505953460659310, guid: 12dfa119a573b7e4ea41cedb7d775d45, type: 3}
@@ -1497,7 +1479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2625896655504302361, guid: c247422791cb8fd4eb55e160c03f5fd5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.04
+      value: 0.233
       objectReference: {fileID: 0}
     - target: {fileID: 2625896655504302361, guid: c247422791cb8fd4eb55e160c03f5fd5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1874,7 +1856,8 @@ PrefabInstance:
       value: 304
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7457719420130253332, guid: 2f7932c972e716647afd7feac917ed77, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5535815724605911455, guid: 2f7932c972e716647afd7feac917ed77, type: 3}
       insertIndex: 0
