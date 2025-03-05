@@ -48,7 +48,8 @@ public class PlayerMovement : MonoBehaviour
     public float indicatorMaxScale = 2f;
 
 
-
+    [Header("Falling")]
+    public float fallMultiplier = 5f;
 
     public float fallVelocityThreshold = -10f; // threshold to consider it a "big fall"
     public float stunDuration = 1f;            // how long to stun after a big fall
@@ -63,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxSlopeAngle;
     private RaycastHit slopHit;
     private bool exitingSlope;
+    private bool isJumping;
 
     Rigidbody rb;
     public MovementState state;
@@ -79,6 +81,12 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
         }
+        if (!grounded && !OnSlope() && rb.linearVelocity.y < 0)
+        {
+            rb.AddForce(Vector3.down * fallMultiplier, ForceMode.Acceleration);
+        }
+        Debug.Log(OnSlope());
+
     }
     public void Start()
     {
@@ -240,9 +248,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void NormalJump()
     {
-        // Normal jump: purely vertical
+        isJumping = true;
+        exitingSlope = true;
+        // Zero out the Y velocity
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+        Invoke(nameof(ResetJump), jumpCooldown);
+
     }
     private void PerformChargedJump(float jumpPower)
     {
@@ -268,18 +280,21 @@ public class PlayerMovement : MonoBehaviour
     public void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+
         if (OnSlope() && !exitingSlope)
         {
             rb.AddForce(GetSlopeMoveDirection() * MoveSpeed * 20f, ForceMode.Force);
-            if(rb.linearVelocity.y > 0)
-                rb.AddForce(Vector3.down * 80f , ForceMode.Force);
+
+            if (rb.linearVelocity.y > 0)
+                rb.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
         if (grounded)
             rb.AddForce(moveDirection.normalized * MoveSpeed * 10f, ForceMode.Force);
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * MoveSpeed * 10f * airMultiplier, ForceMode.Force);
 
-       // rb.useGravity = !OnSlope();
+         rb.useGravity = !OnSlope();
 
     }
 
@@ -307,13 +322,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetJump()
     {
-        readyToJump = true;
+        isJumping = false;
         exitingSlope = false;
-
+        readyToJump = true;
     }
 
     private bool OnSlope()
     {
+
         if (Physics.Raycast(transform.position, Vector3.down, out slopHit, playerHeight * 0.5f + 0.3f))
         {
             float angle = Vector3.Angle(Vector3.up, slopHit.normal);
