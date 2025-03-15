@@ -69,8 +69,20 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public MovementState state;
 
+
+
+
+
+
+    public bool restricted;
+    public bool freeze;
+    public bool unlimited;
+
+
     public enum MovementState
     {
+        freeze,
+        unlimited,
         walking,
         sprinting,
         air
@@ -85,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.down * fallMultiplier, ForceMode.Acceleration);
         }
-        Debug.Log(OnSlope());
+       // Debug.Log(OnSlope());
 
     }
     public void Start()
@@ -279,6 +291,10 @@ public class PlayerMovement : MonoBehaviour
 
     public void MovePlayer()
     {
+
+        if (restricted) return;
+
+
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
 
@@ -351,7 +367,19 @@ public class PlayerMovement : MonoBehaviour
     }
     private void StateHandler()
     {
-        if(grounded && Input.GetKey(sprintKey))
+        if (freeze)
+        {
+            state = MovementState.freeze;
+            rb.linearVelocity = Vector3.zero;
+        }
+        else if (unlimited)
+        {
+            state = MovementState.unlimited;
+            MoveSpeed = 999f;
+            return;
+
+        }
+        if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             MoveSpeed = sprintSpeed;
