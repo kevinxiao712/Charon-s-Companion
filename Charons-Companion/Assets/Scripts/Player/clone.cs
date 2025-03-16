@@ -37,10 +37,10 @@ public class clone : MonoBehaviour
     }
     void Awake()
     {
-        playerCullingMask = LayerMask.GetMask("Default", "whatIsGround", "Player", "Clone");
+        playerCullingMask = LayerMask.GetMask("Default", "whatIsGround", "Player", "Clone", "whatIsLedge");
 
 
-        cloneCullingMask = LayerMask.GetMask("Default", "Clone", "Player", "whatIsGround", "CloneVisible");
+        cloneCullingMask = LayerMask.GetMask("Default", "Clone", "Player", "whatIsGround", "CloneVisible", "whatIsLedge");
 
         Camera mainCam = Camera.main;
         if (mainCam != null)
