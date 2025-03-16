@@ -12,10 +12,14 @@ public class LedgeGrabber : MonoBehaviour
     [Header("Ledge Grabbing")]
     public float moveToLedgeSpeed;
     public float maxLedgeGrabDistance;
-
     public float minTimeonLedge;
     private float timeOnLedge;
     public bool holding;
+
+    [Header("Ledge Jumping")]
+    public KeyCode jumpkey = KeyCode.Space;
+    public float ledgeJumpForwardForce;
+    public float ledgeJumpUpwardForce;
 
 
 
@@ -30,11 +34,15 @@ public class LedgeGrabber : MonoBehaviour
     private RaycastHit ledgeHit;
 
 
+    public bool exitingLedge;
+    public float exitLedgeTime;
+    private float exitLedgeTimer;
 
     public void Update()
     {
         ledgeDetection();
         SubStateMachine();
+        Debug.DrawRay(transform.position, cam.forward * ledgeDetectionLength, Color.red);
 
     }
 
@@ -49,6 +57,13 @@ public class LedgeGrabber : MonoBehaviour
             FreezeRigidBodyOnLedge();
             timeOnLedge += Time.deltaTime;
             if (timeOnLedge > minTimeonLedge && anyInputKeysPressed) ExitLedgeHold();
+            if (Input.GetKeyDown(jumpkey)) ledgeJump();
+        }
+
+        else if (exitingLedge)
+        {
+            if (exitLedgeTimer > 0) exitLedgeTimer -= Time.deltaTime;
+            else exitingLedge = false;
         }
     }
 
@@ -57,7 +72,7 @@ public class LedgeGrabber : MonoBehaviour
     {
 
         bool ledgeDetected = Physics.SphereCast(transform.position, ledgeSphereCastRadius, cam.forward, out ledgeHit, ledgeDetectionLength,whatIsLedge);
-        Debug.Log(ledgeDetected);
+
 
         if (!ledgeDetected) return;
 
@@ -85,19 +100,23 @@ public class LedgeGrabber : MonoBehaviour
     private void FreezeRigidBodyOnLedge()
     {
         rb.useGravity = false;
+
         Vector3 directionToLedge = currLedge.position - transform.position;
         float distanceToLedge = Vector3.Distance(transform.position, currLedge.transform.position);
+        Debug.Log(distanceToLedge);
 
-        if (distanceToLedge < 1f)
+        if (distanceToLedge > 0.9f)
         {
             if (rb.linearVelocity.magnitude < moveToLedgeSpeed)
-            {
+            
                 rb.AddForce(directionToLedge.normalized * moveToLedgeSpeed * 1000f * Time.deltaTime);
-            }
+        
         }
         else
         {
             if (!pm.freeze) pm.freeze = true;
+
+
             if(pm.unlimited) pm.unlimited = false;
         }
         if (distanceToLedge > maxLedgeGrabDistance)
@@ -106,8 +125,22 @@ public class LedgeGrabber : MonoBehaviour
             ExitLedgeHold();
         }
     }
+
+    private void ledgeJump()
+    {
+        ExitLedgeHold();
+        Invoke(nameof(DelayedJumpForce), 0.05f);
+    }
+    private void DelayedJumpForce()
+    {
+        Vector3 forceToAdd = cam.forward * ledgeJumpForwardForce + orientation.up * ledgeJumpUpwardForce;
+        rb.linearVelocity = Vector3.zero;
+        rb.AddForce(forceToAdd, ForceMode.Impulse);
+    }
     private void ExitLedgeHold()
     {
+        exitingLedge = true;
+        exitLedgeTimer = exitLedgeTime;
         holding = false;
         timeOnLedge = 0f;
         pm.restricted = false;

@@ -22,7 +22,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask whatIsGround;
     bool grounded;
 
-
+    [Header("Sprinting Jump")]
+    public float sprintJumpForce = 12f;
 
     [Header("Coyote Time")]
     public float coyoteTime = 0.2f;          // Duration to still allow jumping after stepping off
@@ -38,8 +39,8 @@ public class PlayerMovement : MonoBehaviour
     public float maxHoldTime = 2f;
     public float maxJumpForce = 10f;
     public float horizontalBoost = 5f;
-    private float holdTime = 0f;
-    private bool isCharging = false;
+    public float holdTime = 0f;
+    public bool isCharging = false;
     public float chargeTapThreshold = 0.2f;
 
 
@@ -260,11 +261,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void NormalJump()
     {
+
+        float jumpForceToUse = jumpforce;
+        if (state == MovementState.sprinting)
+        {
+            jumpForceToUse = sprintJumpForce;
+        }
+
         isJumping = true;
         exitingSlope = true;
         // Zero out the Y velocity
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+        rb.AddForce(Vector3.up * jumpForceToUse, ForceMode.Impulse);
         Invoke(nameof(ResetJump), jumpCooldown);
 
     }
@@ -293,7 +301,13 @@ public class PlayerMovement : MonoBehaviour
     {
 
         if (restricted) return;
+        if (isCharging)
+        {
 
+            Vector3 currentVel = rb.linearVelocity;
+            rb.linearVelocity = new Vector3(0f, currentVel.y, 0f);
+            return;  // End MovePlayer here so no further movement forces are applied
+        }
 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -375,11 +389,11 @@ public class PlayerMovement : MonoBehaviour
         else if (unlimited)
         {
             state = MovementState.unlimited;
-            MoveSpeed = 999f;
+            MoveSpeed = 50f;
             return;
 
         }
-        if (grounded && Input.GetKey(sprintKey))
+        else if (grounded && Input.GetKey(sprintKey))
         {
             state = MovementState.sprinting;
             MoveSpeed = sprintSpeed;
@@ -392,6 +406,7 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             state = MovementState.air;
+            MoveSpeed = walkSpeed;
         }
     }
 }
