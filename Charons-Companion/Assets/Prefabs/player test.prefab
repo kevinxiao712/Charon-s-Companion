@@ -30,6 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4599560142406426586}
+  - {fileID: 7459676264273187581}
   m_Father: {fileID: 868293870326022831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3513497930011676650
@@ -150,6 +151,114 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5143125613105054761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7459676264273187581}
+  - component: {fileID: 5198954502216767218}
+  - component: {fileID: 4836120741780641237}
+  - component: {fileID: 7190596778021310689}
+  m_Layer: 6
+  m_Name: jumpindicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7459676264273187581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143125613105054761}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7938519937827571193}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &5198954502216767218
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143125613105054761}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &4836120741780641237
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143125613105054761}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7190596778021310689
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5143125613105054761}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5577454821520529135
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,6 +767,8 @@ GameObject:
   - component: {fileID: 6745293927177853395}
   - component: {fileID: 6452192284567945430}
   - component: {fileID: 2691374045678926998}
+  - component: {fileID: 5717368403098723630}
+  - component: {fileID: 3388267108693715461}
   m_Layer: 6
   m_Name: player test
   m_TagString: Player
@@ -734,19 +845,25 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1536
+  sprintJumpForce: 12
   coyoteTime: 0.2
   orientation: {fileID: 7938519937827571193}
   maxHoldTime: 2
   maxJumpForce: 20
   horizontalBoost: 8
+  holdTime: 0
+  isCharging: 0
   chargeTapThreshold: 0.2
-  jumpIndicator: {fileID: 0}
+  jumpIndicator: {fileID: 8674822041445584102, guid: c7e7b256a5bf61a44aae0ecbd51eac4e, type: 3}
   indicatorMaxScale: 2
   fallMultiplier: 8
   fallVelocityThreshold: -10
   stunDuration: 1
   maxSlopeAngle: 80
   state: 0
+  restricted: 0
+  freeze: 0
+  unlimited: 0
 --- !u!114 &2691374045678926998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,10 +878,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 868293870326022831}
   playerMovement: {fileID: 6452192284567945430}
-  clonePrefab: {fileID: 8710541137338650774}
+  clonePrefab: {fileID: 2873618877833817014, guid: 2f7932c972e716647afd7feac917ed77, type: 3}
   vcam: {fileID: 0}
   playerOrientation: {fileID: 7938519937827571193}
   playerModel: {fileID: 2583741722654376649}
   toggleKey: 101
   destroyKey: 113
   testController: {fileID: 0}
+--- !u!114 &5717368403098723630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710541137338650774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd41d389619a9c3448269c3f94c61a63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pm: {fileID: 6452192284567945430}
+  orientation: {fileID: 7938519937827571193}
+  cam: {fileID: 0}
+  rb: {fileID: 6745293927177853395}
+  moveToLedgeSpeed: 15
+  maxLedgeGrabDistance: 2
+  minTimeonLedge: 0.5
+  holding: 0
+  jumpkey: 32
+  ledgeJumpForwardForce: 5
+  ledgeJumpUpwardForce: 5
+  ledgeDetectionLength: 0.5
+  ledgeSphereCastRadius: 0.25
+  whatIsLedge:
+    serializedVersion: 2
+    m_Bits: 16384
+  exitingLedge: 0
+  exitLedgeTime: 0.2
+  jumpforce: 7
+--- !u!114 &3388267108693715461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710541137338650774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b17bf2c9ca99043912fdd4a22bd413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCube: {fileID: 5143125613105054761}
+  verticalOffset: 2
+  followPlayer: 1
+  defaultScale: 1
