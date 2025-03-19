@@ -2266,6 +2266,10 @@ PrefabInstance:
       propertyPath: testController
       value: 
       objectReference: {fileID: 1952754085}
+    - target: {fileID: 5717368403098723630, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1952754096}
     - target: {fileID: 6452192284567945430, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
       propertyPath: jumpIndicator
       value: 
@@ -2274,7 +2278,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: player test
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5717368403098723630, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7938519937827571193, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
