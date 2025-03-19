@@ -38,6 +38,9 @@ public class LedgeGrabber : MonoBehaviour
     public float exitLedgeTime;
     private float exitLedgeTimer;
 
+
+
+    public float jumpforce;
     public void Update()
     {
         ledgeDetection();
@@ -56,7 +59,7 @@ public class LedgeGrabber : MonoBehaviour
         {
             FreezeRigidBodyOnLedge();
             timeOnLedge += Time.deltaTime;
-            if (timeOnLedge > minTimeonLedge && anyInputKeysPressed) ExitLedgeHold();
+            //if (timeOnLedge > minTimeonLedge && anyInputKeysPressed) ExitLedgeHold();
             if (Input.GetKeyDown(jumpkey)) ledgeJump();
         }
 
@@ -133,9 +136,9 @@ public class LedgeGrabber : MonoBehaviour
     }
     private void DelayedJumpForce()
     {
-        Vector3 forceToAdd = cam.forward * ledgeJumpForwardForce + orientation.up * ledgeJumpUpwardForce;
-        rb.linearVelocity = Vector3.zero;
-        rb.AddForce(forceToAdd, ForceMode.Impulse);
+        float jumpForceToUse = jumpforce;
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        rb.AddForce(Vector3.up * jumpForceToUse, ForceMode.Impulse);
     }
     private void ExitLedgeHold()
     {
