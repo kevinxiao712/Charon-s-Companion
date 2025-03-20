@@ -18,7 +18,9 @@ public class clone : MonoBehaviour
 
     public TestController testController;
 
-
+    [Header("Tail Objects")]
+    public GameObject tail;              // The normal tail (child of player)
+    public GameObject tailPrefabObject;  // The alternate tail (child of player)
 
     // Internal references
     private GameObject currentClone;         // The currently spawned clone (if any)
@@ -41,7 +43,8 @@ public class clone : MonoBehaviour
 
 
         cloneCullingMask = LayerMask.GetMask("Default", "Clone", "Player", "whatIsGround", "CloneVisible", "whatIsLedge");
-
+        if (tail != null) tail.SetActive(true);
+        if (tailPrefabObject != null) tailPrefabObject.SetActive(false);
         Camera mainCam = Camera.main;
         if (mainCam != null)
         {
@@ -64,6 +67,33 @@ public class clone : MonoBehaviour
                 DestroyClone();
             }
         }
+
+    }
+    private void LateUpdate()
+    {
+        // Only do this if a clone exists AND the tailPrefab is active
+        if (cloneExists && currentClone != null && tailPrefabObject != null && tailPrefabObject.activeInHierarchy)
+        {
+            RotateTailTowardClone();
+        }
+    }
+    private void RotateTailTowardClone()
+    {
+        Vector3 dir = currentClone.transform.position - tailPrefabObject.transform.position;
+        dir = tailPrefabObject.transform.parent.InverseTransformDirection(dir);
+        dir.y = 0f;
+
+        if (dir.sqrMagnitude < 0.0001f)
+            return;
+
+        // 2) Convert direction to angle around Y
+        float angleY = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+
+
+
+        Vector3 newLocalEuler = tailPrefabObject.transform.localEulerAngles;
+        newLocalEuler.y = angleY;
+        tailPrefabObject.transform.localEulerAngles = newLocalEuler;
     }
     private void HandleToggle()
     {
@@ -150,7 +180,8 @@ public class clone : MonoBehaviour
         Vector3 spawnPosition = player.position - player.forward * behindDistance;
         currentClone = Instantiate(clonePrefab, spawnPosition, player.rotation);
         cloneExists = true;
-
+        if (tail != null) tail.SetActive(false);
+        if (tailPrefabObject != null) tailPrefabObject.SetActive(true);
         cloneMovement = currentClone.GetComponent<PlayerMovement>();
 
         // Immediately control the clone
@@ -231,6 +262,9 @@ public class clone : MonoBehaviour
         cloneMovement = null;
         cloneExists = false;
         controllingClone = false;
+        if (tail != null) tail.SetActive(true);
+        if (tailPrefabObject != null) tailPrefabObject.SetActive(false);
+
 
         if (playerMovement != null)
             playerMovement.enabled = true;
