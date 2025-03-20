@@ -61,7 +61,7 @@ public class PlatformSpawner : MonoBehaviour
 
 
             bool correctOccupants = (occupantA == "Player" && occupantB == "Clone") || (occupantA == "Clone" && occupantB == "Player");
-            Debug.Log(correctOccupants);
+           // Debug.Log(correctOccupants);
             // If both spots are occupied by Player & Clone, check for key press
             if (correctOccupants)
             {
