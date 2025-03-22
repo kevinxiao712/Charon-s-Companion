@@ -13,6 +13,11 @@ public class PlayerMovement : MonoBehaviour
     bool readyToJump;
 
 
+    [Header("Air Speeds")]
+    public float walkAirSpeed = 5f;     // Max speed in air if jumped while walking
+    public float sprintAirSpeed = 10f;  // Max speed in air if jumped while sprinting
+
+
     [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
    public KeyCode sprintKey = KeyCode.LeftShift;
@@ -71,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
     public MovementState state;
 
 
+    private MovementState lastGroundedState = MovementState.walking;
 
 
 
@@ -262,19 +268,26 @@ public class PlayerMovement : MonoBehaviour
     private void NormalJump()
     {
 
-        float jumpForceToUse = jumpforce;
+
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+        // The vertical jump always uses jumpforce
+        rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+
+        // If sprinting, add a horizontal boost
         if (state == MovementState.sprinting)
         {
-            jumpForceToUse = sprintJumpForce;
+            Vector3 forwardBoost = orientation.forward;
+            forwardBoost.y = 0f;
+            forwardBoost.Normalize();
+            rb.AddForce(forwardBoost * sprintJumpForce, ForceMode.Impulse);
+            Debug.Log("Velocity after jump: " + rb.linearVelocity);
+
         }
 
         isJumping = true;
         exitingSlope = true;
-        // Zero out the Y velocity
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-        rb.AddForce(Vector3.up * jumpForceToUse, ForceMode.Impulse);
         Invoke(nameof(ResetJump), jumpCooldown);
-
     }
     private void PerformChargedJump(float jumpPower)
     {
@@ -330,24 +343,53 @@ public class PlayerMovement : MonoBehaviour
 
     private void SpeedControl()
     {
-
-        if (OnSlope() && !exitingSlope)
+        if (grounded && !exitingSlope)
         {
-            if (rb.linearVelocity.magnitude > MoveSpeed)
-                rb.linearVelocity = rb.linearVelocity.normalized * MoveSpeed;
+            // Normal ground clamp
+            if (OnSlope())
+            {
+                if (rb.linearVelocity.magnitude > MoveSpeed)
+                {
+                    rb.linearVelocity = rb.linearVelocity.normalized * MoveSpeed;
+                }
+            }
+            else
+            {
+                Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+                if (flatVel.magnitude > MoveSpeed)
+                {
+                    Vector3 limitedVel = flatVel.normalized * MoveSpeed;
+                    rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+                }
+            }
         }
         else
         {
+            // We're in the air
+            float currentMaxAirSpeed;
 
-            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
-            if (flatVel.magnitude > MoveSpeed)
+            // If we jumped while sprinting, use sprintAirSpeed. Otherwise use walkAirSpeed.
+            if (lastGroundedState == MovementState.sprinting)
             {
-                Vector3 limitedVel = flatVel.normalized * MoveSpeed;
+                currentMaxAirSpeed = sprintAirSpeed;
+            }
+            else
+            {
+                currentMaxAirSpeed = walkAirSpeed;
+            }
+
+            // Now clamp horizontal speed to currentMaxAirSpeed
+            Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+            if (flatVel.magnitude > currentMaxAirSpeed)
+            {
+                Vector3 limitedVel = flatVel.normalized * currentMaxAirSpeed;
                 rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
             }
         }
     }
+
+
+
 
 
     private void ResetJump()
@@ -381,32 +423,56 @@ public class PlayerMovement : MonoBehaviour
     }
     private void StateHandler()
     {
+        // If freeze
         if (freeze)
         {
             state = MovementState.freeze;
             rb.linearVelocity = Vector3.zero;
+            return;
         }
+        // If unlimited
         else if (unlimited)
         {
             state = MovementState.unlimited;
             MoveSpeed = 50f;
             return;
+        }
 
-        }
-        else if (grounded && Input.GetKey(sprintKey))
+        // Now handle normal states
+        if (grounded)
         {
-            state = MovementState.sprinting;
-            MoveSpeed = sprintSpeed;
-        }
-        else if(grounded)
-        {
-            state = MovementState.walking;
-            MoveSpeed= walkSpeed;
+            // Are we pressing the sprint key?
+            if (Input.GetKey(sprintKey))
+            {
+                state = MovementState.sprinting;
+                MoveSpeed = sprintSpeed;
+
+                // Remember that we were sprinting on the ground
+                lastGroundedState = MovementState.sprinting;
+            }
+            else
+            {
+                state = MovementState.walking;
+                MoveSpeed = walkSpeed;
+
+                // Remember that we were walking on the ground
+                lastGroundedState = MovementState.walking;
+            }
         }
         else
         {
+            // We're in the air
             state = MovementState.air;
-            MoveSpeed = walkSpeed;
+
+            // Check what we were doing last time we were on the ground
+            if (lastGroundedState == MovementState.sprinting)
+            {
+                MoveSpeed = sprintSpeed;
+            }
+            else
+            {
+                MoveSpeed = walkSpeed;
+            }
         }
     }
 }
