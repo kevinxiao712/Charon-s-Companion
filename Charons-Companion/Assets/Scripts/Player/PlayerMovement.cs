@@ -50,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("Jump Indicator")]
-    public GameObject jumpIndicator;    
     public float indicatorMaxScale = 2f;
 
 
