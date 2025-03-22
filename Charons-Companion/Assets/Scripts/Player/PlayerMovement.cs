@@ -50,7 +50,6 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("Jump Indicator")]
-    public GameObject jumpIndicator;    
     public float indicatorMaxScale = 2f;
 
 
@@ -196,19 +195,7 @@ public class PlayerMovement : MonoBehaviour
         {
             holdTime += Time.deltaTime;
             holdTime = Mathf.Clamp(holdTime, 0f, maxHoldTime);
-
-            if (jumpIndicator != null)
-            {
-                jumpIndicator.SetActive(true);
-                float chargeRatio = holdTime / maxHoldTime;
-                float scaleValue = Mathf.Lerp(1f, indicatorMaxScale, chargeRatio);
-                jumpIndicator.transform.localScale = Vector3.one * scaleValue;
-            }
-        }
-        else
-        {
-            if (jumpIndicator != null)
-                jumpIndicator.SetActive(false);
+ 
         }
     }
     private void MyInput()
@@ -291,7 +278,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void PerformChargedJump(float jumpPower)
     {
-
+        isJumping = true;
+        exitingSlope = true;
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         Vector3 jumpDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -325,19 +313,34 @@ public class PlayerMovement : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
 
+        // Slope movement
         if (OnSlope() && !exitingSlope)
         {
             rb.AddForce(GetSlopeMoveDirection() * MoveSpeed * 20f, ForceMode.Force);
 
+
             if (rb.linearVelocity.y > 0)
                 rb.AddForce(Vector3.down * 80f, ForceMode.Force);
         }
-        if (grounded)
+        else if (grounded)
+        {
             rb.AddForce(moveDirection.normalized * MoveSpeed * 10f, ForceMode.Force);
-        else if (!grounded)
+        }
+        else
+        {
             rb.AddForce(moveDirection.normalized * MoveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
 
-         rb.useGravity = !OnSlope();
+        // Only disable gravity if fully on slope and not in coyote time, etc.
+        if (OnSlope() && grounded && !exitingSlope && !isJumping && coyoteTimeCounter <= 0f)
+        {
+            rb.useGravity = false;
+        }
+        else
+        {
+            rb.useGravity = true;
+        }
+
 
     }
 
@@ -439,7 +442,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Now handle normal states
-        if (grounded)
+        else if (grounded)
         {
             // Are we pressing the sprint key?
             if (Input.GetKey(sprintKey))
