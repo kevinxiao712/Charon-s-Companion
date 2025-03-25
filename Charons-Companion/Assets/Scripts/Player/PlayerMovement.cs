@@ -78,7 +78,9 @@ public class PlayerMovement : MonoBehaviour
     private MovementState lastGroundedState = MovementState.walking;
 
 
-
+    [Header("Jump Count (Double Jump)")]
+    public int maxJumpCount = 2;   // Allow 2 jumps: initial jump and one mid-air jump.
+    private int jumpCount = 0;
 
     public bool restricted;
     public bool freeze;
@@ -144,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
         {
             // Reset coyote time
             coyoteTimeCounter = coyoteTime;
+            jumpCount = 0;
         }
         else
         {
@@ -202,30 +205,42 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-     //   Debug.Log(readyToJump);
         bool isMovingInput = (Mathf.Abs(horizontalInput) > 0.01f || Mathf.Abs(verticalInput) > 0.01f);
 
-
-
-        if (Input.GetKeyDown(jumpKey) && readyToJump && (grounded || coyoteTimeCounter > 0f))
+        // Check for jump input when ready to jump
+        if (Input.GetKeyDown(jumpKey) && readyToJump)
         {
-            // Use up coyote time
-            coyoteTimeCounter = 0f;
-
-            if (isMovingInput)
+            bool canJumpNormally = grounded || coyoteTimeCounter > 0f;
+            // If on ground (or within coyote time) and still have jumps left:
+            if (canJumpNormally && jumpCount < maxJumpCount)
             {
-                // If the player is moving, do a normal jump immediately
+                jumpCount++;            // Count this as the first jump
+                coyoteTimeCounter = 0f;   // Use up coyote time
+
+                if (isMovingInput)
+                {
+                    readyToJump = false;
+                    NormalJump();
+                    Invoke(nameof(ResetJump), jumpCooldown);
+                }
+                else
+                {
+                    // If standing still, begin charging jump
+                    isCharging = true;
+                    holdTime = 0f;
+                }
+            }
+            // Else if already in the air (and not within coyote time) but have not used the extra jump yet
+            else if (!canJumpNormally && jumpCount < maxJumpCount)
+            {
+                jumpCount++;  // This is the double jump.
                 readyToJump = false;
                 NormalJump();
                 Invoke(nameof(ResetJump), jumpCooldown);
             }
-            else
-            {
-                // If standing still begin charging
-                isCharging = true;
-                holdTime = 0f;
-            }
         }
+
+        // Handle jump key release for charged jump
         if (Input.GetKeyUp(jumpKey) && isCharging)
         {
             isCharging = false;
@@ -233,9 +248,9 @@ public class PlayerMovement : MonoBehaviour
             // If the hold time is below a small threshold, treat it as a tap => normal jump
             if (holdTime < chargeTapThreshold)
             {
-                // Just do a normal jump with no forward velocity
                 readyToJump = false;
                 NormalJump();
+                jumpCount++;  // Count the jump even if it was a tap
                 Invoke(nameof(ResetJump), jumpCooldown);
             }
             else
@@ -243,10 +258,9 @@ public class PlayerMovement : MonoBehaviour
                 // Else, it's a charged jump
                 float chargeRatio = holdTime / maxHoldTime;
                 float finalJumpForce = Mathf.Lerp(jumpforce, maxJumpForce, chargeRatio);
-
                 PerformChargedJump(finalJumpForce);
-
                 readyToJump = false;
+                jumpCount++;  // Count the jump
                 Invoke(nameof(ResetJump), jumpCooldown);
             }
         }
