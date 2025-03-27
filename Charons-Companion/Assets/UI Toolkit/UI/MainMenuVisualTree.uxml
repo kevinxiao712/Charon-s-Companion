@@ -1,0 +1,8 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=81e5f6bae2a2fbf4ab25c22a347fa468&amp;type=3#MainMenuStyle" />
+    <engine:VisualElement name="Container" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/UI/b.png?fileID=2800000&amp;guid=e471aa8ca758a994c9bae136fbb9561d&amp;type=3#b&quot;);">
+        <engine:Label name="Title" class="header" style="background-image: url(&quot;project://database/Assets/Art/UI/Charons-Companion.png?fileID=2800000&amp;guid=ef551c33c2de82740bebe43a9243c6d0&amp;type=3#Charons-Companion&quot;); height: 256px; margin-top: 64px;" />
+        <engine:Button name="StartButton" class="button" style="background-image: url(&quot;project://database/Assets/Art/UI/Start.png?fileID=2800000&amp;guid=7665afb01b6921f41802cd3a8ea5f481&amp;type=3#Start&quot;); background-size: 70% 80%;" />
+        <engine:Button name="QuitButton" class="button" style="margin-top: 16px; background-image: url(&quot;project://database/Assets/Art/UI/Quit.png?fileID=2800000&amp;guid=91687f9094e40fc458525a7a32b79b35&amp;type=3#Quit&quot;); background-size: 70% 80%;" />
+    </engine:VisualElement>
+</engine:UXML>
