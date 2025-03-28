@@ -58705,11 +58705,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6452192284567945430, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
       propertyPath: jumpforce
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6452192284567945430, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
       propertyPath: maxAirSpeed
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6452192284567945430, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
+      propertyPath: maxJumpForce
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6452192284567945430, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
       propertyPath: walkAirSpeed
@@ -58721,7 +58725,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6452192284567945430, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
       propertyPath: sprintJumpForce
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7190596778021310689, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
       propertyPath: m_Enabled
