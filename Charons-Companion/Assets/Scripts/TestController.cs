@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class TestController : MonoBehaviour
@@ -14,11 +15,18 @@ public class TestController : MonoBehaviour
 
     public float rotationSpeed;
 
+    [Header("Camera Zoom (FOV)")]
+    public CinemachineCamera vcam;
+    public float zoomSpeed = 2f;
+    public float minFOV = 15f;
+    public float maxFOV = 70f;
+
 
     public void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
     }
     public void LateUpdate()
     {
@@ -48,6 +56,19 @@ public class TestController : MonoBehaviour
                 Time.deltaTime * rotationSpeed
             );
         }
+        if (vcam != null)
+        {
+            float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+            if (Mathf.Abs(scrollInput) > 0.01f)
+            {
+                Debug.Log(scrollInput);
+                float currentFOV = vcam.Lens.FieldOfView;
+                float newFOV = currentFOV - scrollInput * zoomSpeed;
+                newFOV = Mathf.Clamp(newFOV, minFOV, maxFOV);
+                vcam.Lens.FieldOfView = newFOV;
+            }
+        }
+
     }
 
 }
