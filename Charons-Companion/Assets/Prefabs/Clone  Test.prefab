@@ -216,6 +216,7 @@ MonoBehaviour:
   stunDuration: 1
   maxSlopeAngle: 80
   state: 0
+  maxJumpCount: 2
   restricted: 0
   freeze: 0
   unlimited: 0
@@ -309,7 +310,7 @@ Transform:
   m_GameObject: {fileID: 7765377129419945310}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -3.39, z: 0}
+  m_LocalPosition: {x: 0, y: -4.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -337,7 +338,7 @@ MonoBehaviour:
   m_DecalLayerMask: 2
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 0}
-  m_Size: {x: 0.75, y: 0.75, z: 2}
+  m_Size: {x: 0.75, y: 0.75, z: 3}
   m_FadeFactor: 1
 --- !u!114 &4495781527466976702
 MonoBehaviour:
@@ -598,9 +599,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2426102835071323629, guid: 1df286c3e8f47194cb6143686a20cc4b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282130869040086947, guid: 1df286c3e8f47194cb6143686a20cc4b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4164969756329068676, guid: 1df286c3e8f47194cb6143686a20cc4b, type: 3}
       propertyPath: m_Name
       value: Nyx_Prefab_Spirit
+      objectReference: {fileID: 0}
+    - target: {fileID: 5048251314339543315, guid: 1df286c3e8f47194cb6143686a20cc4b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5471896960510335941, guid: 1df286c3e8f47194cb6143686a20cc4b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6770094410849499931, guid: 1df286c3e8f47194cb6143686a20cc4b, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

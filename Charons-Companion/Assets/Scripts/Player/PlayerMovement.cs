@@ -189,7 +189,7 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.linearDamping = 0;
 
-        chargeJump();
+       // chargeJump();
     }
 
     public void chargeJump()
