@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
     public MovementState state;
-
+    public Animator playerAnimator;
 
     private MovementState lastGroundedState = MovementState.walking;
 
