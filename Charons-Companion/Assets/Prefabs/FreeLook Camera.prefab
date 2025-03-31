@@ -110,7 +110,7 @@ MonoBehaviour:
       Radius: 4
       Height: 2.25
     Bottom:
-      Radius: 3
+      Radius: 2
       Height: -2
     SplineCurvature: 0
   RecenteringTarget: 2
@@ -268,6 +268,12 @@ MonoBehaviour:
   zoomSpeed: 20
   minFOV: 20
   maxFOV: 80
+  targetRenderers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  fadeStartDistance: 1.5
+  fadeEndDistance: 0.5
 --- !u!114 &6673804621829337623
 MonoBehaviour:
   m_ObjectHideFlags: 0
