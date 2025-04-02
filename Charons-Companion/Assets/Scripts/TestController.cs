@@ -26,9 +26,6 @@ public class TestController : MonoBehaviour
 
     private void Start()
     {
-        // If you prefer to auto-grab them from children, you could do:
-        // targetRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
-
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
