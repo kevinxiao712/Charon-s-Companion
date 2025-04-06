@@ -106,14 +106,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.down * fallMultiplier, ForceMode.Acceleration);
         }
-        if (state == MovementState.sprinting)
-        {
-            playerAnimator.SetBool("isRunning", true);
-        }
-        else
-        {
-            playerAnimator.SetBool("isRunning", false);
-        }
+
         // Debug.Log(OnSlope());
 
     }
@@ -198,7 +191,16 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.linearDamping = 0;
 
-       // chargeJump();
+
+        bool isActuallyMoving = (Mathf.Abs(horizontalInput) > 0.01f || Mathf.Abs(verticalInput) > 0.01f);
+        bool isWalking = (state == MovementState.walking && isActuallyMoving && grounded);
+        bool isRunning = (state == MovementState.sprinting && grounded);
+
+        // Set walk/run bools:
+        playerAnimator.SetBool("isWalking", isWalking);
+        playerAnimator.SetBool("isRunning", isRunning);
+
+        // chargeJump();
     }
 
     public void chargeJump()
@@ -225,7 +227,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumpCount++;            // Count this as the first jump
                 coyoteTimeCounter = 0f;   // Use up coyote time
-
+                playerAnimator.SetTrigger("Jump");
                 if (isMovingInput)
                 {
                     readyToJump = false;
