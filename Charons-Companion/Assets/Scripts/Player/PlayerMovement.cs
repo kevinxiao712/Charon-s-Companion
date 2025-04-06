@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
+
+    public Animator playerAnimator;
     [Header("Movement")]
     private float MoveSpeed;
     public float walkSpeed;
@@ -73,7 +75,6 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
     public MovementState state;
-    public Animator playerAnimator;
 
     private MovementState lastGroundedState = MovementState.walking;
 
@@ -105,7 +106,15 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.down * fallMultiplier, ForceMode.Acceleration);
         }
-       // Debug.Log(OnSlope());
+        if (state == MovementState.sprinting)
+        {
+            playerAnimator.SetBool("isRunning", true);
+        }
+        else
+        {
+            playerAnimator.SetBool("isRunning", false);
+        }
+        // Debug.Log(OnSlope());
 
     }
     public void Start()
