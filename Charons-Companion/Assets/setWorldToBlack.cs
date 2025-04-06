@@ -1,17 +1,24 @@
 using System.ComponentModel;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class setWorldToBlack : MonoBehaviour
 {
-    RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
-    Color beginColour = RenderSettings.ambientLight;
+
+    Color beginColour;
     bool enteredSpiritWorld = false;
     float timer = 0;
+
+    private void Start()
+    {
+        beginColour = RenderSettings.ambientSkyColor;
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
-        
-        
+        RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+
         enteredSpiritWorld = true;
     }
 
