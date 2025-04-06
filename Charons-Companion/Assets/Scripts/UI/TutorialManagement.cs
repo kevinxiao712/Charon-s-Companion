@@ -35,7 +35,7 @@ public class TutorialManagement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             for (int i = 0; i < tutorials.Length; i++)
             {
