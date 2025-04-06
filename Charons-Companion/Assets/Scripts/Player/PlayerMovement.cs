@@ -221,13 +221,14 @@ public class PlayerMovement : MonoBehaviour
         // Check for jump input when ready to jump
         if (Input.GetKeyDown(jumpKey) && readyToJump)
         {
+            playerAnimator.SetTrigger("Jumping");
             bool canJumpNormally = grounded || coyoteTimeCounter > 0f;
             // If on ground (or within coyote time) and still have jumps left:
             if (canJumpNormally && jumpCount < maxJumpCount)
             {
                 jumpCount++;            // Count this as the first jump
                 coyoteTimeCounter = 0f;   // Use up coyote time
-                playerAnimator.SetTrigger("Jump");
+                playerAnimator.SetTrigger("Jumping");
                 if (isMovingInput)
                 {
                     readyToJump = false;
