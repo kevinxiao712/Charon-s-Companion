@@ -27,7 +27,7 @@ public class setWorldToBlack : MonoBehaviour
         
         if (enteredSpiritWorld)
         {
-            timer += Time.deltaTime;
+            timer += (Time.deltaTime / 2);
             RenderSettings.ambientLight = Color.Lerp(beginColour, Color.black, timer);
         }
     }
