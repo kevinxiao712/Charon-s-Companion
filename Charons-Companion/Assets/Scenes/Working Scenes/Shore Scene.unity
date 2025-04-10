@@ -8569,8 +8569,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.013916016, y: -0.0022583008}
-  m_SizeDelta: {x: -1358.6, y: -560.9}
+  m_AnchoredPosition: {x: 1.0134277, y: 1.0145264}
+  m_SizeDelta: {x: -1106.2339, y: -611.947}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &198321745
 MonoBehaviour:
@@ -17675,14 +17675,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2020145425260319168, guid: 4950bd2533b8fbb49b8989efee292f6a, type: 3}
       propertyPath: letterMessage
-      value: "Dear Daisy,\r\nI got your letter today, and I think I read it three
+      value: "Dear Daisy,\n\r\nI got your letter today, and I think I read it three
         times. I miss you too, but I\u2019m glad you\u2019re settling in. Your new
         room sounds amazing! Send me a drawing of the view, since I know you\u2019re
         already sketching it.\r\nThings here are the same, mostly. School\u2019s
         boring without you, and lunch is way too quiet. I keep turning to say something
         to you, but you\u2019re not there, and it sucks. But I know you\u2019re going
-        to do great things over there.\r\nTell me all about your first day of school.
-        I want to hear everything.\r\nLove,\r\nChrys\r"
+        to do great things over there.\n\r\nTell me all about your first day of school.
+        I want to hear everything.\n\r\nLove,\r\nChrys\r"
       objectReference: {fileID: 0}
     - target: {fileID: 2020145425260319168, guid: 4950bd2533b8fbb49b8989efee292f6a, type: 3}
       propertyPath: descriptionText
@@ -19296,6 +19296,17 @@ PrefabInstance:
       propertyPath: letterPanel
       value: 
       objectReference: {fileID: 198321743}
+    - target: {fileID: 831805394470804104, guid: a1b4ba2a978d65a469808846d57e9823, type: 3}
+      propertyPath: letterMessage
+      value: "Dear Chrys,\n\r\nI don\u2019t know how to say this, but Daisy would
+        have wanted you to know. She passed away last week in an accident. She was
+        walking home from work when a car ran a red light. It was sudden. We\u2019re
+        still trying to make sense of it.\n\r\nShe talked about you all the time.
+        Even when she hadn\u2019t heard from you in a while, she still wrote letters.
+        She kept every one you sent, tucked away like something precious.\n\r\nI
+        don\u2019t know what happened between you two, but I do know she never stopped
+        caring about you. She loved you, Chrys. She always did.\n\r\nI'm so so sorry,\r\nMonica\r\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 831805394470804104, guid: a1b4ba2a978d65a469808846d57e9823, type: 3}
       propertyPath: descriptionText
       value: 
@@ -31588,8 +31599,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.7597656, y: 0}
-  m_SizeDelta: {x: 114.3558, y: 0}
+  m_AnchoredPosition: {x: 6.7752075, y: 0}
+  m_SizeDelta: {x: 436.7994, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &740159016
 MonoBehaviour:
@@ -31604,7 +31615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -49052,6 +49063,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 198321743}
     - target: {fileID: 831805394470804104, guid: 3c713a850089ad14b8c6928ea6fddc2f, type: 3}
+      propertyPath: letterMessage
+      value: "Dear Chrys,\r\n\r\nI don\u2019t know if you\u2019re even reading these
+        anymore, but I can\u2019t stop writing them.\r\n\r\nI miss you. I don\u2019t
+        know what happened, did I do something wrong? I feel like I lost you. I don\u2019t
+        want that.\r\n\r\nPlease write back. Even if it\u2019s just a couple words.
+        Just tell me you\u2019re still there.\n\r\nLove,\r\nDaisy\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 831805394470804104, guid: 3c713a850089ad14b8c6928ea6fddc2f, type: 3}
       propertyPath: descriptionText
       value: 
       objectReference: {fileID: 1979372582}
@@ -60914,7 +60933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
@@ -62851,6 +62870,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 97805618}
     m_Modifications:
+    - target: {fileID: 2351826081675268906, guid: 375c67779f25c134e8c15cb5bc40f2d7, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3638825592496283506, guid: 375c67779f25c134e8c15cb5bc40f2d7, type: 3}
       propertyPath: m_margin.w
       value: -230.1519
@@ -62878,6 +62901,14 @@ PrefabInstance:
     - target: {fileID: 4148866000770000446, guid: 375c67779f25c134e8c15cb5bc40f2d7, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664031732997189402, guid: 375c67779f25c134e8c15cb5bc40f2d7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -427
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664031732997189402, guid: 375c67779f25c134e8c15cb5bc40f2d7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 7589039569522740669, guid: 375c67779f25c134e8c15cb5bc40f2d7, type: 3}
       propertyPath: m_Type
@@ -88246,6 +88277,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 198321743}
     - target: {fileID: 831805394470804104, guid: c8805b38dc36a4845b516bc4b7c4568e, type: 3}
+      propertyPath: letterMessage
+      value: "Dear Daisy,\n\r\nI got your letter today, and I think I read it three
+        times. I miss you too, but I\u2019m glad you\u2019re settling in. Your new
+        room sounds amazing! Send me a drawing of the view, since I know you\u2019re
+        already sketching it.\r\nThings here are the same, mostly. School\u2019s
+        boring without you, and lunch is way too quiet. I keep turning to say something
+        to you, but you\u2019re not there, and it sucks. But I know you\u2019re going
+        to do great things over there.\n\r\nTell me all about your first day of school.
+        I want to hear everything.\n\r\nLove,\r\nChrys\r\n\r\n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 831805394470804104, guid: c8805b38dc36a4845b516bc4b7c4568e, type: 3}
       propertyPath: descriptionText
       value: 
       objectReference: {fileID: 1979372582}
@@ -90494,8 +90536,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278323736
+  m_fontColor: {r: 0.09433961, g: 0.04051284, b: 0.009641623, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -90512,8 +90554,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -90522,7 +90564,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 3
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -90550,7 +90592,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -6.6543775, y: -7.265705, z: -7.777374, w: -147.59746}
+  m_margin: {x: -6.6543775, y: -7.265705, z: -4.5875545, w: 2.1972923}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -90573,15 +90615,15 @@ RectTransform:
   m_GameObject: {fileID: 1979372581}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2298, y: 1.2298, z: 1.2298}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 198321744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9.6944, y: 97}
-  m_SizeDelta: {x: 323.4219, y: 54.3899}
+  m_AnchoredPosition: {x: 8.6524, y: 0.2971}
+  m_SizeDelta: {x: 512.7518, y: 318.2409}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1982232377
 GameObject:
