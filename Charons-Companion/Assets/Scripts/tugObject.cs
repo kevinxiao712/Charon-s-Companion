@@ -47,12 +47,7 @@ public class tugObject : MonoBehaviour
                 this.transform.position = target.transform.position;
                 isPulled = true;
             }
-            //remove this if we do not want the player to move the object back.
-            else
-            {
-                this.transform.position = origin.transform.position;
-                isPulled = false;
-            }
+            
         }
     }
 

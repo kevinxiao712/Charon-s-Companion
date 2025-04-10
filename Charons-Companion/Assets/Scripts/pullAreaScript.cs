@@ -10,9 +10,11 @@ public class pullAreaScript : MonoBehaviour
     /// <param name="other"></param>
     protected void OnTriggerEnter(Collider other)
     {
+
         if (other != null)
         {
             tugObject.setPullable(true);
+
         }
     }
 

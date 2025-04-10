@@ -6,13 +6,19 @@ public class PressurePlate : MonoBehaviour
     public LayerMask activatorLayer; // Define layers that can activate the plate
     public GameObject linkedObject;  // The object this plate controls (door, platform, etc.)
     public float pressDepth = 0.1f;  // How much the plate moves down when stepped on
-
+    public bool willMove = false;
+    public GameObject otherPosition;
     private Vector3 originalPosition;
     private bool isPressed = false;
 
     void Start()
     {
         originalPosition = transform.position;
+
+        if (willMove)
+        {
+            originalPosition = otherPosition.transform.position;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
