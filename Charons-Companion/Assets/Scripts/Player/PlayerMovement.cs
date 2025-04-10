@@ -19,6 +19,9 @@ public class PlayerMovement : MonoBehaviour
     public float walkAirSpeed = 5f;     // Max speed in air if jumped while walking
     public float sprintAirSpeed = 10f;  // Max speed in air if jumped while sprinting
 
+    [Header("Audio Clips")]
+    public AudioSource audioSource;        // Reference to the AudioSource component
+    public AudioClip[] outOfJumpsClips;
 
     [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -138,11 +141,14 @@ public class PlayerMovement : MonoBehaviour
             grounded = false;
         }
 
-     //   Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f), Color.red);
-    //   Debug.Log(grounded);
+        //   Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f), Color.red);
+        //   Debug.Log(grounded);
 
 
-
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            PlayRandomClip(outOfJumpsClips);
+        }
 
         if (grounded)
         {
@@ -227,6 +233,8 @@ public class PlayerMovement : MonoBehaviour
             if (canJumpNormally && jumpCount < maxJumpCount)
             {
                 jumpCount++;            // Count this as the first jump
+                if(maxJumpCount == jumpCount)
+                    PlayRandomClip(outOfJumpsClips);
                 coyoteTimeCounter = 0f;   // Use up coyote time
                 playerAnimator.SetTrigger("Jumping");
                 if (isMovingInput)
@@ -493,7 +501,7 @@ public class PlayerMovement : MonoBehaviour
             // We're in the air
             state = MovementState.air;
 
-            // Check what we were doing last time we were on the ground
+            // Check what we were doing last time we were on the gruound
             if (lastGroundedState == MovementState.sprinting)
             {
                 MoveSpeed = sprintSpeed;
@@ -503,5 +511,14 @@ public class PlayerMovement : MonoBehaviour
                 MoveSpeed = walkSpeed;
             }
         }
+    }
+    public void PlayRandomClip(AudioClip[] clips)
+    {
+        if (clips == null || clips.Length == 0)
+            return; // no clips assigned
+        Debug.Log("meow");
+        int index = Random.Range(0, clips.Length);   
+        audioSource.clip = clips[index];
+        audioSource.Play();
     }
 }

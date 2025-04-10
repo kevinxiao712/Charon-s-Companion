@@ -58,12 +58,22 @@ public class clone : MonoBehaviour
     {
         if (Input.GetKeyDown(toggleKey))
         {
+            if (playerMovement != null)
+            {
+                PlayRandomClip(playerMovement.outOfJumpsClips, playerMovement.audioSource);
+            }
+
             HandleToggle();
         }
 
         // Press Q to destroy the clone (if it exists)
         if (Input.GetKeyDown(destroyKey))
         {
+            if (playerMovement != null)
+            {
+                PlayRandomClip(playerMovement.outOfJumpsClips, playerMovement.audioSource);
+            }
+
             if (cloneExists)
             {
                 DestroyClone();
@@ -178,6 +188,9 @@ public class clone : MonoBehaviour
 
     private void SpawnClone()
     {
+
+ 
+
         float behindDistance = 0.25f;
         Vector3 spawnPosition = player.position - player.forward * behindDistance;
         currentClone = Instantiate(clonePrefab, spawnPosition, player.rotation);
@@ -212,6 +225,7 @@ public class clone : MonoBehaviour
         }
         Camera.main.cullingMask = cloneCullingMask;
         Camera mainCamera = Camera.main;
+
     }
 
 
@@ -246,7 +260,7 @@ public class clone : MonoBehaviour
     }
 
 
-    private void DestroyClone()
+    public void DestroyClone()
     {
 
         if (controllingClone)
@@ -270,6 +284,8 @@ public class clone : MonoBehaviour
 
         if (playerMovement != null)
             playerMovement.enabled = true;
+
+
 
         if (vcam != null && player != null)
         {
@@ -306,5 +322,13 @@ public class clone : MonoBehaviour
         }
     }
 
+    private void PlayRandomClip(AudioClip[] clips, AudioSource source)
+    {
+        if (clips == null || clips.Length == 0 || source == null)
+            return;
 
+        int index = Random.Range(0, clips.Length);
+        source.clip = clips[index];
+        source.Play();
+    }
 }
