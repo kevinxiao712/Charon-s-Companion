@@ -189,20 +189,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 2451021662071786068}
   walkSpeed: 5
-  sprintSpeed: 8
+  sprintSpeed: 6
   groundDrag: 7
-  jumpforce: 8
+  jumpforce: 7
   jumpCooldown: 0.25
   airMultiplier: 0.2
-  walkAirSpeed: 5
-  sprintAirSpeed: 10
+  walkAirSpeed: 6
+  sprintAirSpeed: 8
   jumpKey: 32
   sprintKey: 304
   playerHeight: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 1536
-  sprintJumpForce: 12
+  sprintJumpForce: 4
   coyoteTime: 0.2
   orientation: {fileID: 5535815724605911455}
   maxHoldTime: 2
