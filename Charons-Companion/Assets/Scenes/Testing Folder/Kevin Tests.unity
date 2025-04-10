@@ -2226,6 +2226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc456b987171b4146b5d30553ed424db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
+  cloneScriptOnPlayer: {fileID: 0}
   player: {fileID: 8710541138494496201}
   respawnIndex: 0
   respawnDelay: 1
@@ -3107,6 +3109,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2221380801296811027, guid: 073d8911c7fccbe4ab0ce8108553cde4, type: 3}
+      propertyPath: moveClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9c513e401fc120647869d779bd24d108, type: 3}
+    - target: {fileID: 2221380801296811027, guid: 073d8911c7fccbe4ab0ce8108553cde4, type: 3}
       propertyPath: closedTransform
       value: 
       objectReference: {fileID: 2129064916}
@@ -3236,9 +3242,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8710541138494496201}
     - target: {fileID: 4296228977974488917, guid: 7fc5f20f2f09d73448dd601fe14dd70b, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 6452192285591014793}
+    - target: {fileID: 4296228977974488917, guid: 7fc5f20f2f09d73448dd601fe14dd70b, type: 3}
       propertyPath: respawnManager
       value: 
       objectReference: {fileID: 1882547704}
+    - target: {fileID: 4296228977974488917, guid: 7fc5f20f2f09d73448dd601fe14dd70b, type: 3}
+      propertyPath: cloneScriptOnPlayer
+      value: 
+      objectReference: {fileID: 8710541138494496204}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3528,6 +3542,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8710541137338650774, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
   m_PrefabInstance: {fileID: 1293634911}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8710541138494496204 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2691374045678926998, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
+  m_PrefabInstance: {fileID: 1293634911}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710541138494496201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb158afe482b3974fb73e95b59716f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
