@@ -31,6 +31,15 @@ public class clone : MonoBehaviour
     private int cloneCullingMask;
     private CinemachineDeoccluder cinemachineCollider;
 
+    public bool CloneExists
+    {
+        get
+        { return cloneExists; }
+
+        set{
+            cloneExists = value;
+        }
+    }
     public Transform playerCameraLookAt;  // Assign via Inspector (child of player)
     private Transform cloneCameraLookAt;  // Found at runtime in the clone prefab
 
@@ -246,7 +255,7 @@ public class clone : MonoBehaviour
     }
 
 
-    private void DestroyClone()
+    public void DestroyClone()
     {
 
         if (controllingClone)
