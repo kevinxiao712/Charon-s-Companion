@@ -10953,6 +10953,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 2073188386}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &251146381
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22771,6 +22773,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 209555365}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &523843507
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36710,6 +36714,8 @@ MonoBehaviour:
     m_Bits: 64
   linkedObject: {fileID: 1655239279}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &839803597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39067,6 +39073,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 1770707358}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &901284952
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40310,6 +40318,8 @@ MonoBehaviour:
     m_Bits: 64
   linkedObject: {fileID: 1784693385}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &920678703
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40728,6 +40738,8 @@ MonoBehaviour:
     m_Bits: 64
   linkedObject: {fileID: 1747557103}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &929117086
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -46551,6 +46563,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 1326724890}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &1071470122
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -53164,6 +53178,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 79903159}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &1200182647
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56000,6 +56016,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 1139702698}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &1255810487
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -56483,6 +56501,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 1089089836}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &1267197003
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64596,6 +64616,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 1149217684}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &1435041567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65972,6 +65994,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 16451163}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &1461089899
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -80382,6 +80406,8 @@ MonoBehaviour:
     m_Bits: 64
   linkedObject: {fileID: 1710327315}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &1642117057
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -81488,6 +81514,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 275701718}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &1665872803
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -94538,7 +94566,7 @@ PrefabInstance:
     - target: {fileID: 6452192284567945430, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
       propertyPath: audioSource
       value: 
-      objectReference: {fileID: 8710541138275030286}
+      objectReference: {fileID: 1946070692}
     - target: {fileID: 6452192284567945430, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
       propertyPath: sprintSpeed
       value: 6
@@ -94622,6 +94650,11 @@ PrefabInstance:
       addedObject: {fileID: 8562382353622716342}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
+--- !u!82 &1946070692 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: -6867574566476138215, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
+  m_PrefabInstance: {fileID: 1946070691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1948378455
 GameObject:
   m_ObjectHideFlags: 0
@@ -96043,6 +96076,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 1979150422}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &1982232380
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106319,6 +106354,8 @@ MonoBehaviour:
     m_Bits: 128
   linkedObject: {fileID: 1088662224}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &2113121682
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -153619,11 +153656,6 @@ Transform:
 --- !u!1 &8710541138275030285 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8710541137338650774, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
-  m_PrefabInstance: {fileID: 1946070691}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &8710541138275030286 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3482879062825384620, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
   m_PrefabInstance: {fileID: 1946070691}
   m_PrefabAsset: {fileID: 0}
 --- !u!33 &8716215224981370027
