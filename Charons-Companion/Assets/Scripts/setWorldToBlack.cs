@@ -17,9 +17,10 @@ public class setWorldToBlack : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+        //RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
 
-        enteredSpiritWorld = true;
+        //enteredSpiritWorld = true;
+        RenderSettings.fog = true;
     }
 
     private void Update()
