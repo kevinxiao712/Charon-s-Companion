@@ -19,7 +19,7 @@ public class setWorldToBlack : MonoBehaviour
     {
         //RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
 
-        //enteredSpiritWorld = true;
+        enteredSpiritWorld = true;
         RenderSettings.fog = true;
     }
 
@@ -28,8 +28,10 @@ public class setWorldToBlack : MonoBehaviour
         
         if (enteredSpiritWorld)
         {
-            timer += (Time.deltaTime / 2);
-            RenderSettings.ambientLight = Color.Lerp(beginColour, Color.black, timer);
+            timer += (Time.deltaTime / 3);
+            RenderSettings.fogStartDistance = Mathf.Lerp(100, 8, timer);
+            RenderSettings.fogEndDistance = Mathf.Lerp(100, 50, timer);
+
         }
     }
 }
