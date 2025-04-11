@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6575857808411702691}
   - component: {fileID: 7544355520985864315}
   - component: {fileID: 3244926879315563874}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: pull Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,6 +167,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d3f1c70d7e9f6574491b5b5ab107066d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d3f1c70d7e9f6574491b5b5ab107066d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d3f1c70d7e9f6574491b5b5ab107066d, type: 3}
       propertyPath: m_Name

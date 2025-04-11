@@ -561,6 +561,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roman_Pillar_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 2325744328249242791, guid: 33a139b721752034e9281f3954bc7ef8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5504252977689101852, guid: 33a139b721752034e9281f3954bc7ef8, type: 3}
       propertyPath: m_LocalScale.x
       value: 341.04813
@@ -1706,6 +1710,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roman_Pillar_Prefab (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2325744328249242791, guid: 33a139b721752034e9281f3954bc7ef8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5504252977689101852, guid: 33a139b721752034e9281f3954bc7ef8, type: 3}
       propertyPath: m_LocalScale.x
       value: 341.04813
@@ -1792,7 +1800,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &723156722
 Transform:
   m_ObjectHideFlags: 0
@@ -2132,7 +2140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &816526720
 Transform:
   m_ObjectHideFlags: 0
@@ -2799,7 +2807,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1196764761
 Transform:
   m_ObjectHideFlags: 0
