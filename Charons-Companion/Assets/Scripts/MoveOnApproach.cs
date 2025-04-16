@@ -70,14 +70,15 @@ public class MoveOnApproach : MonoBehaviour
         if (waypoints.Length == 0) return;
 
         Transform target = waypoints[currentWaypointIndex];
-        // Move toward the target
-        transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position,
+                                                 target.position,
+                                                 moveSpeed * Time.deltaTime);
 
-        float distanceToWaypoint = Vector3.Distance(transform.position, target.position);
-        if (distanceToWaypoint <= arrivalThreshold)
+        if (Vector3.Distance(transform.position, target.position) <= arrivalThreshold)
         {
-            // Stop moving
             isMoving = false;
+            wasInRangeLastFrame = false;  
         }
     }
+
 }
