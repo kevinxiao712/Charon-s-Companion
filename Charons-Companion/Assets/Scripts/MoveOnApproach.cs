@@ -11,7 +11,7 @@ public class MoveOnApproach : MonoBehaviour
     private bool isMoving = false;
 
     [Header("Approach Settings")]
-    public Transform player;             // Reference to the player's transform
+    public string[] targetTags = { "Player", "Clone" }; 
     public float approachDistance = 5f;  // Distance at which the object begins its move
 
 
@@ -21,14 +21,12 @@ public class MoveOnApproach : MonoBehaviour
     {
         if (!isMoving)
         {
-            // Check distance to player
-            float dist = Vector3.Distance(transform.position, player.position);
-            bool isInRange = dist < approachDistance;
+            float nearestDistance = GetNearestTargetDistance();
+            bool isInRange = nearestDistance >= 0f   
+                                   && nearestDistance < approachDistance;
 
-            // If the player *just* entered the range this frame
             if (isInRange && !wasInRangeLastFrame)
             {
-                // Move to the next waypoint
                 StartMovingToNextWaypoint();
             }
 
@@ -36,11 +34,24 @@ public class MoveOnApproach : MonoBehaviour
         }
         else
         {
-            // We are in the process of moving
             MoveTowardsWaypoint();
         }
     }
-
+    private float GetNearestTargetDistance()
+    {
+        float minDist = -1f;          
+        foreach (string tag in targetTags)
+        {
+            GameObject[] objs = GameObject.FindGameObjectsWithTag(tag);
+            foreach (GameObject obj in objs)
+            {
+                float d = Vector3.Distance(transform.position, obj.transform.position);
+                if (minDist < 0f || d < minDist)
+                    minDist = d;
+            }
+        }
+        return minDist;                         
+    }
     private void StartMovingToNextWaypoint()
     {
         // Advance to the next waypoint
