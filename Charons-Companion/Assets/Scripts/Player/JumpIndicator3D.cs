@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public class JumpIndicator3D : MonoBehaviour
 {
@@ -43,3 +43,4 @@ public class JumpIndicator3D : MonoBehaviour
         }
     }
 }
+*/

@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxJumpForce = 10f;
     public float horizontalBoost = 5f;
     public float holdTime = 0f;
-    public bool isCharging = false;
+ //   public bool isCharging = false;
     public float chargeTapThreshold = 0.2f;
 
 
@@ -101,10 +101,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (!isCharging)
-        {
+
             MovePlayer();
-        }
         if (!grounded && !OnSlope() && rb.linearVelocity.y < 0)
         {
             rb.AddForce(Vector3.down * fallMultiplier, ForceMode.Acceleration);
@@ -209,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
         // chargeJump();
     }
 
-    public void chargeJump()
+/*    public void chargeJump()
     {
         if (isCharging)
         {
@@ -217,7 +215,7 @@ public class PlayerMovement : MonoBehaviour
             holdTime = Mathf.Clamp(holdTime, 0f, maxHoldTime);
  
         }
-    }
+    }*/
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -235,20 +233,17 @@ public class PlayerMovement : MonoBehaviour
                 jumpCount++;            // Count this as the first jump
                 if(maxJumpCount == jumpCount)
                     PlayRandomClip(outOfJumpsClips);
-                coyoteTimeCounter = 0f;   // Use up coyote time
-                playerAnimator.SetTrigger("Jumping");
-                if (isMovingInput)
-                {
+                   coyoteTimeCounter = 0f;   // Use up coyote time
+                   playerAnimator.SetTrigger("Jumping");
                     readyToJump = false;
                     NormalJump();
                     Invoke(nameof(ResetJump), jumpCooldown);
-                }
-                else
+/*                else
                 {
                     // If standing still, begin charging jump
                     isCharging = true;
                     holdTime = 0f;
-                }
+                }*/
             }
             // Else if already in the air (and not within coyote time) but have not used the extra jump yet
             else if (!canJumpNormally && jumpCount < maxJumpCount)
@@ -257,33 +252,32 @@ public class PlayerMovement : MonoBehaviour
                 readyToJump = false;
                 NormalJump();
                 Invoke(nameof(ResetJump), jumpCooldown);
+                playerAnimator.ResetTrigger("Jumping");
+                playerAnimator.Play("Jump", 0, 0f);
             }
         }
 
         // Handle jump key release for charged jump
-        if (Input.GetKeyUp(jumpKey) && isCharging)
+/*        if (Input.GetKeyDown(jumpKey) && readyToJump)
         {
-            isCharging = false;
+            bool canJumpNormally = grounded || coyoteTimeCounter > 0f;
 
-            // If the hold time is below a small threshold, treat it as a tap => normal jump
-            if (holdTime < chargeTapThreshold)
+            if (jumpCount < maxJumpCount)
             {
-                readyToJump = false;
-                NormalJump();
-                jumpCount++;  // Count the jump even if it was a tap
-                Invoke(nameof(ResetJump), jumpCooldown);
-            }
-            else
-            {
-                // Else, it's a charged jump
-                float chargeRatio = holdTime / maxHoldTime;
-                float finalJumpForce = Mathf.Lerp(jumpforce, maxJumpForce, chargeRatio);
-                PerformChargedJump(finalJumpForce);
-                readyToJump = false;
-                jumpCount++;  // Count the jump
-                Invoke(nameof(ResetJump), jumpCooldown);
-            }
-        }
+                Jump();                   
+            }*/
+       // }
+        /*            else
+                    {
+                        // Else, it's a charged jump
+                        float chargeRatio = holdTime / maxHoldTime;
+                        float finalJumpForce = Mathf.Lerp(jumpforce, maxJumpForce, chargeRatio);
+                     //   PerformChargedJump(finalJumpForce);
+                        readyToJump = false;
+                        jumpCount++;  // Count the jump
+                        Invoke(nameof(ResetJump), jumpCooldown);
+                   }*/
+    
     }
 
     private void NormalJump()
@@ -310,7 +304,7 @@ public class PlayerMovement : MonoBehaviour
         exitingSlope = true;
         Invoke(nameof(ResetJump), jumpCooldown);
     }
-    private void PerformChargedJump(float jumpPower)
+/*    private void PerformChargedJump(float jumpPower)
     {
         isJumping = true;
         exitingSlope = true;
@@ -330,19 +324,19 @@ public class PlayerMovement : MonoBehaviour
         // Upward impulse
         rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
     }
-
+*/
 
     public void MovePlayer()
     {
 
         if (restricted) return;
-        if (isCharging)
+/*        if (isCharging)
         {
 
             Vector3 currentVel = rb.linearVelocity;
             rb.linearVelocity = new Vector3(0f, currentVel.y, 0f);
             return;  // End MovePlayer here so no further movement forces are applied
-        }
+        }*/
 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -424,10 +418,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-
-
-
 
     private void ResetJump()
     {
@@ -520,5 +510,14 @@ public class PlayerMovement : MonoBehaviour
         int index = Random.Range(0, clips.Length);   
         audioSource.clip = clips[index];
         audioSource.Play();
+    }
+    private void Jump()
+    {
+        readyToJump = false;
+        coyoteTimeCounter = 0f;
+        jumpCount++;
+
+        NormalJump();                  // vertical impulse (and sprint boost if needed)
+        Invoke(nameof(ResetJump), jumpCooldown);
     }
 }

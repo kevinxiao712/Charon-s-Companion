@@ -156,6 +156,8 @@ MonoBehaviour:
     m_Bits: 64
   linkedObject: {fileID: 1504465007}
   pressDepth: 0.1
+  willMove: 0
+  otherPosition: {fileID: 0}
 --- !u!65 &22659433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1934,10 +1936,6 @@ PrefabInstance:
       propertyPath: testController
       value: 
       objectReference: {fileID: 1952754085}
-    - target: {fileID: 6452192284567945430, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
-      propertyPath: maxSlopeAngle
-      value: 70
-      objectReference: {fileID: 0}
     - target: {fileID: 8710541137338650774, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
       propertyPath: m_Name
       value: player test
@@ -2644,24 +2642,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 375c67779f25c134e8c15cb5bc40f2d7, type: 3}
---- !u!137 &369957691500143537 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 369957690208775918, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
-  m_PrefabInstance: {fileID: 1293634911}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &638581058582036839 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 638581057557892152, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
-  m_PrefabInstance: {fileID: 1293634911}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &868293871450574832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 868293870326022831, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
-  m_PrefabInstance: {fileID: 1293634911}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &1379925831241073519 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1379925830084972080, guid: f221d864641b15a48a10a9466ecbbeaa, type: 3}
   m_PrefabInstance: {fileID: 1293634911}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1434818825961744382
@@ -3466,15 +3449,15 @@ PrefabInstance:
     - target: {fileID: 6816905487276677128, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
       propertyPath: 'targetRenderers.Array.data[0]'
       value: 
-      objectReference: {fileID: 638581058582036839}
+      objectReference: {fileID: 0}
     - target: {fileID: 6816905487276677128, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
       propertyPath: 'targetRenderers.Array.data[1]'
       value: 
-      objectReference: {fileID: 1379925831241073519}
+      objectReference: {fileID: 0}
     - target: {fileID: 6816905487276677128, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
       propertyPath: 'targetRenderers.Array.data[2]'
       value: 
-      objectReference: {fileID: 369957691500143537}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
