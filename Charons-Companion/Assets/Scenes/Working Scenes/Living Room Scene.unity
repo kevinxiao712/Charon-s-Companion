@@ -567,11 +567,12 @@ Transform:
   m_GameObject: {fileID: 89747581}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.6, y: 0.689, z: 1.54}
+  m_LocalPosition: {x: -3.71, y: 0.689, z: 2.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1346155633}
+  - {fileID: 1683131817}
   m_Father: {fileID: 1461532544}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &89747583
@@ -596,7 +597,9 @@ MonoBehaviour:
   - {fileID: 381638346}
   moveSpeed: 6
   arrivalThreshold: 0.3
-  player: {fileID: 926648484}
+  targetTags:
+  - Player
+  - Clone
   approachDistance: 2
 --- !u!4 &94453817 stripped
 Transform:
@@ -740,7 +743,7 @@ MonoBehaviour:
   m_text: "Press\t\t   to Jump."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
-  m_sharedMaterial: {fileID: 5378086854698719577, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
+  m_sharedMaterial: {fileID: -8797519332509404491, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7724,7 +7727,7 @@ MonoBehaviour:
   m_text: Press F to close the window
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
-  m_sharedMaterial: {fileID: 5378086854698719577, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
+  m_sharedMaterial: {fileID: -8797519332509404491, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8527,7 +8530,7 @@ MonoBehaviour:
   m_text: Look around
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
-  m_sharedMaterial: {fileID: 5378086854698719577, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
+  m_sharedMaterial: {fileID: -8797519332509404491, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9897,7 +9900,7 @@ MonoBehaviour:
   m_text: Let's Jump and Run!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
-  m_sharedMaterial: {fileID: 5378086854698719577, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
+  m_sharedMaterial: {fileID: -8797519332509404491, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10249,7 +10252,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
-  m_sharedMaterial: {fileID: 5378086854698719577, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
+  m_sharedMaterial: {fileID: -8797519332509404491, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21216,7 +21219,7 @@ MonoBehaviour:
   m_text: "Press\t\t   in the air to Double Jump."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
-  m_sharedMaterial: {fileID: 5378086854698719577, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
+  m_sharedMaterial: {fileID: -8797519332509404491, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21574,7 +21577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1346155633
 Transform:
   m_ObjectHideFlags: 0
@@ -22616,7 +22619,7 @@ MonoBehaviour:
   m_text: Press F to close the window
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
-  m_sharedMaterial: {fileID: 5378086854698719577, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
+  m_sharedMaterial: {fileID: -8797519332509404491, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -24056,7 +24059,7 @@ MonoBehaviour:
   m_text: Nyx, a small step forward!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
-  m_sharedMaterial: {fileID: 5378086854698719577, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
+  m_sharedMaterial: {fileID: -8797519332509404491, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -24132,6 +24135,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1679481629}
   m_CullTransparentMesh: 1
+--- !u!1001 &1683131816
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 89747582}
+    m_Modifications:
+    - target: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7215040332488055791, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+      propertyPath: m_Name
+      value: MagicOrb
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+--- !u!4 &1683131817 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4011477155743871892, guid: 050132d805675e94aa288b20eb91294f, type: 3}
+  m_PrefabInstance: {fileID: 1683131816}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1692608268
 GameObject:
   m_ObjectHideFlags: 0
@@ -29716,11 +29781,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0842d032a45f4ab48a224f5bcaa8034d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.007009456
+      value: -0.00701
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0842d032a45f4ab48a224f5bcaa8034d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.002154476
+      value: -0.0074
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0842d032a45f4ab48a224f5bcaa8034d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -35571,7 +35636,7 @@ MonoBehaviour:
   m_text: "Press\t\t   to Run!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
-  m_sharedMaterial: {fileID: 5378086854698719577, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
+  m_sharedMaterial: {fileID: -8797519332509404491, guid: d1521147fee18464e8df646b4a0a19b4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

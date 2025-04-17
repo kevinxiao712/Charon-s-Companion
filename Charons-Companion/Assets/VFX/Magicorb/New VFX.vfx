@@ -16,10 +16,10 @@ MonoBehaviour:
   - title: Burst
     position:
       serializedVersion: 2
-      x: 264
-      y: 295
-      width: 474
-      height: 2201
+      x: 261
+      y: 294
+      width: 478
+      height: 2084
     contents:
     - model: {fileID: 8926484042661614978}
       id: 0
@@ -440,7 +440,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.AABox, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"center":{"x":0.0,"y":0.0,"z":0.0},"size":{"x":7.0,"y":8.0,"z":7.0}}'
+      m_SerializableObject: '{"center":{"x":0.0,"y":0.0,"z":0.0},"size":{"x":10.0,"y":10.0,"z":10.0}}'
     m_Space: 0
   m_Property:
     name: bounds
@@ -889,12 +889,12 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614983}
-  m_UIPosition: {x: 289, y: 354}
+  m_UIPosition: {x: 286, y: 353}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots: []
-  m_Label: Spawn system
+  m_Label: Large Center Particle
   m_Data: {fileID: 8926484042661614987}
   m_InputFlowSlot:
   - link: []
@@ -955,7 +955,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 16
+      m_SerializableObject: 4
     m_Space: -1
   m_Property:
     name: Rate
@@ -1387,7 +1387,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615011}
       inputSlot: {fileID: 8926484042661614999}
-    position: {x: 0.43478394, y: 1720.8696}
+    position: {x: -2.4, y: 1719.2001}
     expandedSlots: []
     expanded: 1
     supecollapsed: 0
@@ -2896,7 +2896,7 @@ MonoBehaviour:
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots: []
-  m_Label: Spawn system
+  m_Label: Small Particles
   m_Data: {fileID: 8926484042661615130}
   m_InputFlowSlot:
   - link: []
