@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class setWorldToBlack : MonoBehaviour
 {
-
+    [SerializeField] ParticleSystem portal;
     Color beginColour;
     bool enteredSpiritWorld = false;
     float timer = 0;
@@ -21,6 +21,7 @@ public class setWorldToBlack : MonoBehaviour
 
         enteredSpiritWorld = true;
         RenderSettings.fog = true;
+        portal.Play();
     }
 
     private void Update()
