@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ShoreDevTools : MonoBehaviour
 {
-    [SerializeField] private GameObject[] sections = new GameObject[6];
+    [SerializeField] private GameObject[] sections = new GameObject[7];
     [SerializeField] private GameObject player;
     /// <summary>
     /// Whenever a key is pressed, the player will be moved to the beginning of that section.
