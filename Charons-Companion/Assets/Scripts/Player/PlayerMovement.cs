@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
+
+    public Animator playerAnimator;
     [Header("Movement")]
     private float MoveSpeed;
     public float walkSpeed;
@@ -23,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
-   public KeyCode sprintKey = KeyCode.LeftShift;
+    public KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("GroundCheck")]
     public float playerHeight;
@@ -48,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     public float maxJumpForce = 10f;
     public float horizontalBoost = 5f;
     public float holdTime = 0f;
- //   public bool isCharging = false;
+    //   public bool isCharging = false;
     public float chargeTapThreshold = 0.2f;
 
 
@@ -77,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public MovementState state;
 
-
     private MovementState lastGroundedState = MovementState.walking;
 
 
@@ -101,12 +102,13 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
-            MovePlayer();
+        MovePlayer();
         if (!grounded && !OnSlope() && rb.linearVelocity.y < 0)
         {
             rb.AddForce(Vector3.down * fallMultiplier, ForceMode.Acceleration);
         }
-       // Debug.Log(OnSlope());
+
+        // Debug.Log(OnSlope());
 
     }
     public void Start()
@@ -114,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
-        
+
     }
 
     public void Update()
@@ -193,18 +195,27 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.linearDamping = 0;
 
-        chargeJump();
+
+        bool isActuallyMoving = (Mathf.Abs(horizontalInput) > 0.01f || Mathf.Abs(verticalInput) > 0.01f);
+        bool isWalking = (state == MovementState.walking && isActuallyMoving && grounded);
+        bool isRunning = (state == MovementState.sprinting && grounded);
+
+        // Set walk/run bools:
+        playerAnimator.SetBool("isWalking", isWalking);
+        playerAnimator.SetBool("isRunning", isRunning);
+
+        // chargeJump();
     }
 
-/*    public void chargeJump()
-    {
-        if (isCharging)
+    /*    public void chargeJump()
         {
-            holdTime += Time.deltaTime;
-            holdTime = Mathf.Clamp(holdTime, 0f, maxHoldTime);
- 
-        }
-    }*/
+            if (isCharging)
+            {
+                holdTime += Time.deltaTime;
+                holdTime = Mathf.Clamp(holdTime, 0f, maxHoldTime);
+
+            }
+        }*/
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -214,24 +225,25 @@ public class PlayerMovement : MonoBehaviour
         // Check for jump input when ready to jump
         if (Input.GetKeyDown(jumpKey) && readyToJump)
         {
+            playerAnimator.SetTrigger("Jumping");
             bool canJumpNormally = grounded || coyoteTimeCounter > 0f;
             // If on ground (or within coyote time) and still have jumps left:
             if (canJumpNormally && jumpCount < maxJumpCount)
             {
                 jumpCount++;            // Count this as the first jump
-                if(maxJumpCount == jumpCount)
+                if (maxJumpCount == jumpCount)
                     PlayRandomClip(outOfJumpsClips);
-                   coyoteTimeCounter = 0f;   // Use up coyote time
-                   playerAnimator.SetTrigger("Jumping");
-                    readyToJump = false;
-                    NormalJump();
-                    Invoke(nameof(ResetJump), jumpCooldown);
-/*                else
-                {
-                    // If standing still, begin charging jump
-                    isCharging = true;
-                    holdTime = 0f;
-                }*/
+                coyoteTimeCounter = 0f;   // Use up coyote time
+                playerAnimator.SetTrigger("Jumping");
+                readyToJump = false;
+                NormalJump();
+                Invoke(nameof(ResetJump), jumpCooldown);
+                /*                else
+                                {
+                                    // If standing still, begin charging jump
+                                    isCharging = true;
+                                    holdTime = 0f;
+                                }*/
             }
             // Else if already in the air (and not within coyote time) but have not used the extra jump yet
             else if (!canJumpNormally && jumpCount < maxJumpCount)
@@ -246,15 +258,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Handle jump key release for charged jump
-/*        if (Input.GetKeyDown(jumpKey) && readyToJump)
-        {
-            bool canJumpNormally = grounded || coyoteTimeCounter > 0f;
+        /*        if (Input.GetKeyDown(jumpKey) && readyToJump)
+                {
+                    bool canJumpNormally = grounded || coyoteTimeCounter > 0f;
 
-            if (jumpCount < maxJumpCount)
-            {
-                Jump();                   
-            }*/
-       // }
+                    if (jumpCount < maxJumpCount)
+                    {
+                        Jump();                   
+                    }*/
+        // }
         /*            else
                     {
                         // Else, it's a charged jump
@@ -265,7 +277,7 @@ public class PlayerMovement : MonoBehaviour
                         jumpCount++;  // Count the jump
                         Invoke(nameof(ResetJump), jumpCooldown);
                    }*/
-    
+
     }
 
     private void NormalJump()
@@ -292,39 +304,39 @@ public class PlayerMovement : MonoBehaviour
         exitingSlope = true;
         Invoke(nameof(ResetJump), jumpCooldown);
     }
-/*    private void PerformChargedJump(float jumpPower)
-    {
-        isJumping = true;
-        exitingSlope = true;
-        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
-
-        Vector3 jumpDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        if (jumpDirection.sqrMagnitude < 0.01f)
+    /*    private void PerformChargedJump(float jumpPower)
         {
-            jumpDirection = orientation.forward;
+            isJumping = true;
+            exitingSlope = true;
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+
+            Vector3 jumpDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            if (jumpDirection.sqrMagnitude < 0.01f)
+            {
+                jumpDirection = orientation.forward;
+            }
+            jumpDirection.y = 0f;
+            jumpDirection.Normalize();
+
+            // Horizontal boost
+            rb.linearVelocity += jumpDirection * horizontalBoost;
+
+            // Upward impulse
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
         }
-        jumpDirection.y = 0f;
-        jumpDirection.Normalize();
-
-        // Horizontal boost
-        rb.linearVelocity += jumpDirection * horizontalBoost;
-
-        // Upward impulse
-        rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-    }
-*/
+    */
 
     public void MovePlayer()
     {
 
         if (restricted) return;
-/*        if (isCharging)
-        {
+        /*        if (isCharging)
+                {
 
-            Vector3 currentVel = rb.linearVelocity;
-            rb.linearVelocity = new Vector3(0f, currentVel.y, 0f);
-            return;  // End MovePlayer here so no further movement forces are applied
-        }*/
+                    Vector3 currentVel = rb.linearVelocity;
+                    rb.linearVelocity = new Vector3(0f, currentVel.y, 0f);
+                    return;  // End MovePlayer here so no further movement forces are applied
+                }*/
 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -495,7 +507,7 @@ public class PlayerMovement : MonoBehaviour
         if (clips == null || clips.Length == 0)
             return; // no clips assigned
         Debug.Log("meow");
-        int index = Random.Range(0, clips.Length);   
+        int index = Random.Range(0, clips.Length);
         audioSource.clip = clips[index];
         audioSource.Play();
     }
