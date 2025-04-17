@@ -2,8 +2,6 @@ using UnityEngine;
 using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
-
-    public Animator playerAnimator;
     [Header("Movement")]
     private float MoveSpeed;
     public float walkSpeed;
@@ -79,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
     public MovementState state;
 
+
     private MovementState lastGroundedState = MovementState.walking;
 
 
@@ -107,8 +106,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.down * fallMultiplier, ForceMode.Acceleration);
         }
-
-        // Debug.Log(OnSlope());
+       // Debug.Log(OnSlope());
 
     }
     public void Start()
@@ -195,16 +193,7 @@ public class PlayerMovement : MonoBehaviour
         else
             rb.linearDamping = 0;
 
-
-        bool isActuallyMoving = (Mathf.Abs(horizontalInput) > 0.01f || Mathf.Abs(verticalInput) > 0.01f);
-        bool isWalking = (state == MovementState.walking && isActuallyMoving && grounded);
-        bool isRunning = (state == MovementState.sprinting && grounded);
-
-        // Set walk/run bools:
-        playerAnimator.SetBool("isWalking", isWalking);
-        playerAnimator.SetBool("isRunning", isRunning);
-
-        // chargeJump();
+        chargeJump();
     }
 
 /*    public void chargeJump()
@@ -225,7 +214,6 @@ public class PlayerMovement : MonoBehaviour
         // Check for jump input when ready to jump
         if (Input.GetKeyDown(jumpKey) && readyToJump)
         {
-            playerAnimator.SetTrigger("Jumping");
             bool canJumpNormally = grounded || coyoteTimeCounter > 0f;
             // If on ground (or within coyote time) and still have jumps left:
             if (canJumpNormally && jumpCount < maxJumpCount)

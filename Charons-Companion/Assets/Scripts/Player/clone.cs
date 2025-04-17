@@ -203,7 +203,6 @@ public class clone : MonoBehaviour
         float behindDistance = 0.25f;
         Vector3 spawnPosition = player.position - player.forward * behindDistance;
         currentClone = Instantiate(clonePrefab, spawnPosition, player.rotation);
-        cloneCameraLookAt = currentClone.transform.Find("Cameralookat");
         cloneExists = true;
         if (tail != null) tail.SetActive(false);
         if (tailPrefabObject != null) tailPrefabObject.SetActive(true);
@@ -230,7 +229,7 @@ public class clone : MonoBehaviour
         {
             //vcam.Follow = currentClone.transform;
             //vcam.LookAt = currentClone.transform;
-            StartCoroutine(SwitchCameraTarget(cloneCameraLookAt));
+            StartCoroutine(SwitchCameraTarget(currentClone.transform));
         }
         Camera.main.cullingMask = cloneCullingMask;
         Camera mainCamera = Camera.main;
@@ -256,12 +255,13 @@ public class clone : MonoBehaviour
         testController.player = player;
         testController.playerObj = playerModel;
 
+
         // Switch camera to player
         if (vcam != null && player != null)
         {
             //vcam.Follow = player;     
             //vcam.LookAt = player;    
-            StartCoroutine(SwitchCameraTarget(playerCameraLookAt));
+            StartCoroutine(SwitchCameraTarget(player));
 
         }
         Camera mainCam = Camera.main;

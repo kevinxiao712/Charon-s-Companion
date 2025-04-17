@@ -11,11 +11,6 @@ public class Dialogue : MonoBehaviour
     public string[] sentences;
     public float typingSpeed;
 
-    public TutorialManagement tutorialManagement; 
-    public int tutorialIDToShow = 0;
-    [SerializeField]
-    public bool showTutorial = false;
-
     private int index;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -71,11 +66,7 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
-            if (tutorialManagement != null && showTutorial)
-            {
-                tutorialManagement.ShowTutorial(tutorialIDToShow);
-            }
+            gameObject.SetActive(false); 
         }
     }
 
