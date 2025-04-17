@@ -190,7 +190,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "wasd - movement\r         space bar - jump\r\nE - create clone and swap
-    between bodies\r\nQ - destroy clone\r\nF - interact/talk"
+    between bodies\r\r\nF - interact/talk"
 --- !u!222 &213745256
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -450,7 +450,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.7761298, y: 11.560053}
+  m_AnchoredPosition: {x: 1535, y: 11.560053}
   m_SizeDelta: {x: 2024.62, y: 716.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &878318664
@@ -547,13 +547,13 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3036118681490598528}
   - {fileID: 2198542341357017958}
   - {fileID: 4418599081579224078}
   - {fileID: 382965282}
   - {fileID: 1322812379}
   - {fileID: 1616252974}
   - {fileID: 831418894}
+  - {fileID: 3036118681490598528}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1680,8 +1680,8 @@ PrefabInstance:
       addedObject: {fileID: 1977610363}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
---- !u!4 &3036118681490598528 stripped
-Transform:
+--- !u!224 &3036118681490598528 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 5872478787344997205, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
   m_PrefabInstance: {fileID: 3036118681490598527}
   m_PrefabAsset: {fileID: 0}
