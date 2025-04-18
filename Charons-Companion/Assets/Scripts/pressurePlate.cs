@@ -1,62 +1,63 @@
+using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class PressurePlate : MonoBehaviour
 {
-    [Header("Settings")]
-    public LayerMask activatorLayer; // Define layers that can activate the plate
-    public GameObject linkedObject;  // The object this plate controls (door, platform, etc.)
-    public float pressDepth = 0.1f;  // How much the plate moves down when stepped on
-    public bool willMove = false;
-    public GameObject otherPosition;
-    private Vector3 originalPosition;
-    private bool isPressed = false;
+    [Header("Visual & Motion")]
+    [Tooltip("Child mesh that should move down/up. " + "Leave empty to move the whole GameObject (not recommended).")]
+    [SerializeField] private Transform plateVisual;
+    public float pressDepth = 0.1f;
 
-    void Start()
+    [Header("Activation")]
+    public LayerMask activatorLayer;
+    public GameObject linkedObject;
+
+    Vector3 visualStartPos;
+    readonly HashSet<Collider> activators = new();
+
+    void Awake()
     {
-        originalPosition = transform.position;
+        visualStartPos = plateVisual != null ? plateVisual.localPosition: Vector3.zero;
 
-        if (willMove)
-        {
-            originalPosition = otherPosition.transform.position;
-        }
+        var col = GetComponent<Collider>();
+        col.isTrigger = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+
+    void OnTriggerEnter(Collider other)
     {
-        if (((1 << other.gameObject.layer) & activatorLayer) != 0)
-        {
-            if (!isPressed)
-            {
-                isPressed = true;
-                PressPlate();
-                if (linkedObject != null)
-                {
-                    linkedObject.SendMessage("Activate", SendMessageOptions.DontRequireReceiver);
-                }
-            }
-        }
+        if (IsActivator(other)) activators.Add(other);
     }
 
-    private void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
-        if (((1 << other.gameObject.layer) & activatorLayer) != 0)
-        {
-            isPressed = false;
-            ReleasePlate();
-            if (linkedObject != null)
-            {
-                linkedObject.SendMessage("Deactivate", SendMessageOptions.DontRequireReceiver);
-            }
-        }
+        if (IsActivator(other)) activators.Remove(other);
     }
 
-    void PressPlate()
+
+    void FixedUpdate()
     {
-        transform.position = originalPosition - new Vector3(0, pressDepth, 0);
+        bool shouldBePressed = activators.Count > 0;
+        ApplyVisual(shouldBePressed);
+        NotifyLinkedObject(shouldBePressed);
     }
 
-    void ReleasePlate()
+
+    bool IsActivator(Collider c)
+        => ((1 << c.gameObject.layer) & activatorLayer) != 0;
+
+    void ApplyVisual(bool pressed)
     {
-        transform.position = originalPosition;
+        if (plateVisual == null) return;
+
+        plateVisual.localPosition = visualStartPos + (pressed ? Vector3.down * pressDepth : Vector3.zero);
+    }
+
+    void NotifyLinkedObject(bool pressed)
+    {
+        if (linkedObject == null) return;
+
+        linkedObject.SendMessage(pressed ? "Activate" : "Deactivate", SendMessageOptions.DontRequireReceiver);
     }
 }

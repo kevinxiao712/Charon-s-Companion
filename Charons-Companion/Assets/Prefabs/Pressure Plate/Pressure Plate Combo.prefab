@@ -409,8 +409,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9c513e401fc120647869d779bd24d108, type: 3}
-  m_Resource: {fileID: 8300000, guid: 9c513e401fc120647869d779bd24d108, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -618,13 +618,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a0d3c01a3380a49bab6231469965eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plateVisual: {fileID: 1819554380155036270}
+  pressDepth: 0.1
   activatorLayer:
     serializedVersion: 2
     m_Bits: 64
   linkedObject: {fileID: 1188126153615483516}
-  pressDepth: 0.1
-  willMove: 0
-  otherPosition: {fileID: 0}
 --- !u!64 &1118699892716968130
 MeshCollider:
   m_ObjectHideFlags: 0
