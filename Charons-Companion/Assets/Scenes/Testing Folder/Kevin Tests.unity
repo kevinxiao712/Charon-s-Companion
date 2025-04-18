@@ -151,13 +151,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a0d3c01a3380a49bab6231469965eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plateVisual: {fileID: 1115223894}
   activatorLayer:
     serializedVersion: 2
     m_Bits: 64
   linkedObject: {fileID: 1504465007}
   pressDepth: 0.1
-  willMove: 0
-  otherPosition: {fileID: 0}
 --- !u!65 &22659433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -246,7 +245,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1115223894}
-  - {fileID: 1234791180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &233091083
@@ -1473,7 +1471,8 @@ Transform:
   m_LocalPosition: {x: 0, y: -0.0054552434, z: 0}
   m_LocalScale: {x: 1, y: 0.545524, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1234791180}
   m_Father: {fileID: 22659436}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1115223895
@@ -1714,16 +1713,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1234791179}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.051298, y: 0.051298, z: 0.051298}
+  m_LocalScale: {x: 0.051298, y: 0.051298, z: 0.09403436}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 22659436}
+  m_Father: {fileID: 1115223894}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.27}
+  m_AnchoredPosition: {x: 0, y: 0.50493693}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1234791181
@@ -2101,7 +2100,9 @@ MonoBehaviour:
   - {fileID: 1505266513}
   moveSpeed: 3
   arrivalThreshold: 0.2
-  player: {fileID: 868293871450574832}
+  targetTags:
+  - Player
+  - Clone
   approachDistance: 1
 --- !u!65 &1380687679
 BoxCollider:
