@@ -11,6 +11,9 @@ public class TriggerToggleObjects : MonoBehaviour
     public GameObject firstObject;  // initially enabled
     public GameObject secondObject; // initially disabled
 
+
+    [SerializeField] private Light pointLight;        
+    [SerializeField] private Color newLightColor = Color.red;
     private void Start()
     {
 
@@ -40,6 +43,9 @@ public class TriggerToggleObjects : MonoBehaviour
                 firstObject.SetActive(false);
             if (secondObject != null)
                 secondObject.SetActive(true);
+
+            if (pointLight != null)
+                pointLight.color = newLightColor;
         }
     }
 }

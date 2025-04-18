@@ -17,7 +17,9 @@ public class LetterPickup : MonoBehaviour
     public float interactRange = 2f;   // how close player must be to pick up
 
     private bool isShowingLetter = false;
+    static readonly string[] interactTags = { "Player", "Clone" };
 
+    Transform currentInteractor;
     void Start()
     {
 
@@ -29,19 +31,17 @@ public class LetterPickup : MonoBehaviour
 
     void Update()
     {
-        // 1) Check if the player is close enough
-        if (PlayerIsInRange() && Input.GetKeyDown(interactKey))
+        // 1) Check for input
+        if (!Input.GetKeyDown(interactKey)) return;
+
+        // 2) Determine if someone is in range
+        if (!isShowingLetter)
         {
-            // 2) Toggle the letter UI
-            if (!isShowingLetter)
-            {
+            if (TryFindInteractor(out currentInteractor))
                 ShowLetter();
-            }
-            else
-            {
-                CloseLetterAndDestroyItem();
-            }
         }
+        else
+            CloseLetterAndDestroyItem();
     }
 
     private bool PlayerIsInRange()
@@ -52,7 +52,22 @@ public class LetterPickup : MonoBehaviour
         float dist = Vector3.Distance(transform.position, player.transform.position);
         return dist <= interactRange;
     }
-
+    bool TryFindInteractor(out Transform found)
+    {
+        foreach (string tag in interactTags)
+        {
+            foreach (var obj in GameObject.FindGameObjectsWithTag(tag))
+            {
+                if (Vector3.Distance(transform.position, obj.transform.position) <= interactRange)
+                {
+                    found = obj.transform;
+                    return true;
+                }
+            }
+        }
+        found = null;
+        return false;
+    }
     private void ShowLetter()
     {
         // 1) Activate the UI

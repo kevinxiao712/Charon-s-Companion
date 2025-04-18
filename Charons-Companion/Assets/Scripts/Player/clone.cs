@@ -298,9 +298,9 @@ public class clone : MonoBehaviour
 
         if (vcam != null && player != null)
         {
-            //vcam.Follow = player;
-            //vcam.LookAt = player;
-            StartCoroutine(SwitchCameraTarget(player));
+            vcam.Follow = playerCameraLookAt;
+           vcam.LookAt = playerCameraLookAt;
+       //     StartCoroutine(SwitchCameraTarget(player));
 
         }
     }

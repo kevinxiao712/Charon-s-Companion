@@ -232,8 +232,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumpCount++;            // Count this as the first jump
                 if (maxJumpCount == jumpCount)
-                    PlayRandomClip(outOfJumpsClips);
                 coyoteTimeCounter = 0f;   // Use up coyote time
+
                 playerAnimator.SetTrigger("Jumping");
                 readyToJump = false;
                 NormalJump();
