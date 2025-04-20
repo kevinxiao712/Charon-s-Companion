@@ -15,7 +15,8 @@ public class PlatformSpawner : MonoBehaviour
 
     // Maps each spot collider -> occupant type: "Player" or "Clone"
     private Dictionary<Collider, string> occupantMap = new Dictionary<Collider, string>();
-
+    public AudioSource audioSource;   // drag one here (e.g. on this object)
+    public AudioClip spawnClip;
     // Called by SpotTrigger when a Player or Clone enters a spot
     public void SetOccupant(Collider spot, string occupant)
     {
@@ -69,6 +70,8 @@ public class PlatformSpawner : MonoBehaviour
                 // Use F key (KeyCode.F)
                 if (Input.GetKeyDown(KeyCode.F))
                 {
+                    if (audioSource != null && spawnClip != null)
+                        audioSource.PlayOneShot(spawnClip);
                     pair.platform.SetActive(true);
                 }
             }

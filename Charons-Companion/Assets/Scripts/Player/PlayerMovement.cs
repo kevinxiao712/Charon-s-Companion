@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Audio Clips")]
     public AudioSource audioSource;        // Reference to the AudioSource component
     public AudioClip[] outOfJumpsClips;
+    public AudioClip doubleJumpClip;
+
 
     [Header("Keys")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -254,6 +256,8 @@ public class PlayerMovement : MonoBehaviour
                 Invoke(nameof(ResetJump), jumpCooldown);
                 playerAnimator.ResetTrigger("Jumping");
                 playerAnimator.Play("Jump", 0, 0f);
+                if (doubleJumpClip != null && audioSource != null)
+                    audioSource.PlayOneShot(doubleJumpClip);
             }
         }
 
