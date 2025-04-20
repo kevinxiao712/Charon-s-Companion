@@ -18,7 +18,8 @@ public class LetterPickup : MonoBehaviour
 
     private bool isShowingLetter = false;
     static readonly string[] interactTags = { "Player", "Clone" };
-
+    public AudioSource audioSource;
+    public AudioClip pickupClip;
     Transform currentInteractor;
     void Start()
     {
@@ -70,6 +71,8 @@ public class LetterPickup : MonoBehaviour
     }
     private void ShowLetter()
     {
+        if (audioSource != null && pickupClip != null)
+            audioSource.PlayOneShot(pickupClip);
         // 1) Activate the UI
         letterPanel.SetActive(true);
         // 2) Set the text

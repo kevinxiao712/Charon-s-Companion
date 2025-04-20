@@ -17,7 +17,8 @@ public class PullTrigger : MonoBehaviour
     private Transform currentPlayer;
     private bool playerInside = false;
     private bool isPulling = false;
-
+    public AudioSource audioSource;
+    public AudioClip pullSound;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(playerTag))
@@ -64,6 +65,8 @@ public class PullTrigger : MonoBehaviour
         {
             if (pullObject != null && pullTarget != null)
             {
+                if (audioSource != null && pullSound != null)
+                    audioSource.PlayOneShot(pullSound);
                 // Start the smooth pull
                 StartCoroutine(SmoothPullRoutine(pullDuration));
             }
