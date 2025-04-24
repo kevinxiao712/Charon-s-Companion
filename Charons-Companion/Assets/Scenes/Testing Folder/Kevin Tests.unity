@@ -2536,108 +2536,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3226408252238351209, guid: 1eb3b4b745f09de449557b52d8fdb25b, type: 3}
   m_PrefabInstance: {fileID: 8411636055065242739}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2114265176 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7460052797076433359, guid: ea3645dd3d2e6e74f9c117e4f9a24b5b, type: 3}
-  m_PrefabInstance: {fileID: 4563101330011857225}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &2114265177
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2114265176}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!4 &2129064916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 560916223139458687, guid: 1e77d75beb3e7c542ac0cd2791db52f2, type: 3}
@@ -3143,10 +3041,6 @@ PrefabInstance:
       value: RopeTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 8604854409909654952, guid: ea3645dd3d2e6e74f9c117e4f9a24b5b, type: 3}
-      propertyPath: pullSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 4fe71ee722deb9b44a49b6ef34703828, type: 3}
-    - target: {fileID: 8604854409909654952, guid: ea3645dd3d2e6e74f9c117e4f9a24b5b, type: 3}
       propertyPath: pullObject
       value: 
       objectReference: {fileID: 1315369989}
@@ -3154,17 +3048,10 @@ PrefabInstance:
       propertyPath: pullTarget
       value: 
       objectReference: {fileID: 1360859752}
-    - target: {fileID: 8604854409909654952, guid: ea3645dd3d2e6e74f9c117e4f9a24b5b, type: 3}
-      propertyPath: audioSource
-      value: 
-      objectReference: {fileID: 2114265177}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7460052797076433359, guid: ea3645dd3d2e6e74f9c117e4f9a24b5b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2114265177}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea3645dd3d2e6e74f9c117e4f9a24b5b, type: 3}
 --- !u!1001 &6387966915600029342
 PrefabInstance:
@@ -3174,6 +3061,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1827766311941944643, guid: 073d8911c7fccbe4ab0ce8108553cde4, type: 3}
+      propertyPath: m_Volume
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2221380801296811027, guid: 073d8911c7fccbe4ab0ce8108553cde4, type: 3}
       propertyPath: moveClip
       value: 

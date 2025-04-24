@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
-
+    private bool jumpKeyReleased = true;
 
     [Header("Air Speeds")]
     public float walkAirSpeed = 5f;     // Max speed in air if jumped while walking
@@ -70,7 +70,9 @@ public class PlayerMovement : MonoBehaviour
     private float maxFallSpeed = 0f;
     private bool wasGrounded = true;
 
-
+    [Header("Jump Forces")]
+    public float groundJumpForce = 10f;
+    public float airJumpForce = 7f;
 
     [Header("Slope Hnadling")]
     public float maxSlopeAngle;
@@ -204,18 +206,21 @@ public class PlayerMovement : MonoBehaviour
         playerAnimator.SetBool("isWalking", isWalking);
         playerAnimator.SetBool("isRunning", isRunning);
 
+
+
+        if (Input.GetKeyUp(jumpKey))
+        {
+            jumpKeyReleased = true;
+            if (jumpCount < maxJumpCount)
+                readyToJump = true;
+        }
+
+        if (grounded && jumpKeyReleased)
+            readyToJump = true;
         // chargeJump();
     }
 
-    /*    public void chargeJump()
-        {
-            if (isCharging)
-            {
-                holdTime += Time.deltaTime;
-                holdTime = Mathf.Clamp(holdTime, 0f, maxHoldTime);
 
-            }
-        }*/
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -225,6 +230,8 @@ public class PlayerMovement : MonoBehaviour
         // Check for jump input when ready to jump
         if (Input.GetKeyDown(jumpKey) && readyToJump)
         {
+            jumpKeyReleased = false;   // lock until it¡¯s released again
+            readyToJump = false;
             playerAnimator.SetTrigger("Jumping");
             bool canJumpNormally = grounded || coyoteTimeCounter > 0f;
             // If on ground (or within coyote time) and still have jumps left:
@@ -238,12 +245,7 @@ public class PlayerMovement : MonoBehaviour
                 readyToJump = false;
                 NormalJump();
                 Invoke(nameof(ResetJump), jumpCooldown);
-                /*                else
-                                {
-                                    // If standing still, begin charging jump
-                                    isCharging = true;
-                                    holdTime = 0f;
-                                }*/
+
             }
             // Else if already in the air (and not within coyote time) but have not used the extra jump yet
             else if (!canJumpNormally && jumpCount < maxJumpCount)
@@ -259,27 +261,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        // Handle jump key release for charged jump
-        /*        if (Input.GetKeyDown(jumpKey) && readyToJump)
-                {
-                    bool canJumpNormally = grounded || coyoteTimeCounter > 0f;
-
-                    if (jumpCount < maxJumpCount)
-                    {
-                        Jump();                   
-                    }*/
-        // }
-        /*            else
-                    {
-                        // Else, it's a charged jump
-                        float chargeRatio = holdTime / maxHoldTime;
-                        float finalJumpForce = Mathf.Lerp(jumpforce, maxJumpForce, chargeRatio);
-                     //   PerformChargedJump(finalJumpForce);
-                        readyToJump = false;
-                        jumpCount++;  // Count the jump
-                        Invoke(nameof(ResetJump), jumpCooldown);
-                   }*/
-
     }
 
     private void NormalJump()
@@ -288,8 +269,8 @@ public class PlayerMovement : MonoBehaviour
 
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-        // The vertical jump always uses jumpforce
-        rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+        float verticalForce = grounded ? groundJumpForce : airJumpForce;
+        rb.AddForce(Vector3.up * verticalForce, ForceMode.Impulse);
 
         // If sprinting, add a horizontal boost
         if (state == MovementState.sprinting)
@@ -304,41 +285,15 @@ public class PlayerMovement : MonoBehaviour
 
         isJumping = true;
         exitingSlope = true;
-        Invoke(nameof(ResetJump), jumpCooldown);
+       Invoke(nameof(ResetJump), jumpCooldown);
     }
-    /*    private void PerformChargedJump(float jumpPower)
-        {
-            isJumping = true;
-            exitingSlope = true;
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
-            Vector3 jumpDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-            if (jumpDirection.sqrMagnitude < 0.01f)
-            {
-                jumpDirection = orientation.forward;
-            }
-            jumpDirection.y = 0f;
-            jumpDirection.Normalize();
-
-            // Horizontal boost
-            rb.linearVelocity += jumpDirection * horizontalBoost;
-
-            // Upward impulse
-            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-        }
-    */
 
     public void MovePlayer()
     {
 
         if (restricted) return;
-        /*        if (isCharging)
-                {
 
-                    Vector3 currentVel = rb.linearVelocity;
-                    rb.linearVelocity = new Vector3(0f, currentVel.y, 0f);
-                    return;  // End MovePlayer here so no further movement forces are applied
-                }*/
 
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
@@ -425,7 +380,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isJumping = false;
         exitingSlope = false;
-        readyToJump = true;
     }
 
     private bool OnSlope()

@@ -16,7 +16,7 @@ public class Door : MonoBehaviour
     private bool isOpen;
     private bool isMoving = false;
 
-    private void Awake()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
@@ -40,39 +40,44 @@ public class Door : MonoBehaviour
         }
     }
 
-    private void StartMovingDoor(Vector3 targetPos)
+
+
+    void StartMovingDoor(Vector3 targetPos)
     {
-        StopAllCoroutines();
-        PlayDoorMoveSound();  
-        StartCoroutine(MoveDoor(targetPos));
+        StopAllCoroutines();                 // cancel any previous move
+        StartCoroutine(MoveDoor(targetPos)); // one place controls motion & audio
     }
 
-    private System.Collections.IEnumerator MoveDoor(Vector3 targetPos)
+    System.Collections.IEnumerator MoveDoor(Vector3 targetPos)
     {
         isMoving = true;
 
-        Vector3 startPos = rb.position;
-        float time = 0f;
-        float duration = 1f;
-
-        while (time < duration)
+        if (doorAudioSource && moveClip && !doorAudioSource.isPlaying)
         {
-            time += Time.deltaTime;
-            float t = time / duration;
-            Vector3 newPos = Vector3.Lerp(startPos, targetPos, t);
-            rb.MovePosition(newPos);
+            doorAudioSource.clip = moveClip;
+            doorAudioSource.loop = true;     // seamless for any duration
+            doorAudioSource.Play();
+        }
+
+        Vector3 startPos = rb.position;
+        float distance = Vector3.Distance(startPos, targetPos);
+        float duration = distance / Mathf.Max(moveSpeed, 0.0001f); // protect div-by-zero
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            rb.MovePosition(Vector3.Lerp(startPos, targetPos, t));
             yield return null;
         }
 
-        rb.MovePosition(targetPos);
-        isMoving = false;
-    }
+        rb.MovePosition(targetPos);        
 
-    private void PlayDoorMoveSound()
-    {
-        if (doorAudioSource != null && moveClip != null && !doorAudioSource.isPlaying)
-        {
-            doorAudioSource.PlayOneShot(moveClip);
-        }
+
+        if (doorAudioSource && doorAudioSource.isPlaying)
+            doorAudioSource.Stop();
+
+        isMoving = false;
     }
 }
