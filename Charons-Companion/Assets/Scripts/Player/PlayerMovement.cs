@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
     private RaycastHit slopHit;
     private bool exitingSlope;
     private bool isJumping;
-
+    [SerializeField] private float ropeSnapVerticalOffset = 20f;
     Rigidbody rb;
     public MovementState state;
 
@@ -99,7 +99,8 @@ public class PlayerMovement : MonoBehaviour
         unlimited,
         walking,
         sprinting,
-        air
+        air,
+        onRope
     }
     private void FixedUpdate()
     {
@@ -124,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
     public void Update()
     {
 
+
         if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit groundHit, playerHeight * 0.5f + 0.2f, whatIsGround))
         {
             float angle = Vector3.Angle(Vector3.up, groundHit.normal);
@@ -140,10 +142,6 @@ public class PlayerMovement : MonoBehaviour
         {
             grounded = false;
         }
-
-        //   Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.2f), Color.red);
-        //   Debug.Log(grounded);
-
 
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -524,4 +522,9 @@ public class PlayerMovement : MonoBehaviour
         NormalJump();                  // vertical impulse (and sprint boost if needed)
         Invoke(nameof(ResetJump), jumpCooldown);
     }
+
+
+
+
+
 }
