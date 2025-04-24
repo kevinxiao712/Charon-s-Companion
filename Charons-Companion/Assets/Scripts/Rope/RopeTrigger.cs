@@ -60,14 +60,12 @@ public class PullTrigger : MonoBehaviour
 
     private void Update()
     {
-        // If inside the trigger, not currently pulling, and user presses F
         if (playerInside && !isPulling && Input.GetKeyDown(pullKey))
         {
             if (pullObject != null && pullTarget != null)
             {
-                if (audioSource != null && pullSound != null)
-                    audioSource.PlayOneShot(pullSound);
-                // Start the smooth pull
+
+
                 StartCoroutine(SmoothPullRoutine(pullDuration));
             }
         }
@@ -77,24 +75,32 @@ public class PullTrigger : MonoBehaviour
     {
         isPulling = true;
 
+        if (audioSource != null && pullSound != null)
+        {
+            audioSource.clip = pullSound;
+            audioSource.loop = true;   // keep it seamlessly looping
+            audioSource.Play();
+        }
 
         Vector3 startPos = pullObject.position;
         Vector3 endPos = pullTarget.position;
-
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
-
             pullObject.position = Vector3.Lerp(startPos, endPos, t);
 
-            yield return null; // wait 1 frame
+            yield return null;   // wait one frame
         }
 
-        // Ensure final position is exactly the pullTarget
         pullObject.position = endPos;
+
+
+        if (audioSource != null && audioSource.isPlaying)
+            audioSource.Stop();
+
         isPulling = false;
     }
 }
