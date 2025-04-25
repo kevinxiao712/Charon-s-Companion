@@ -11,7 +11,13 @@ public class Rope : MonoBehaviour
         pm.EnterRail(transform.right);                   
         SnapSideways(other.transform);               
     }
+    private void OnTriggerStay(Collider other)
+    {
+        var pm = other.GetComponentInParent<PlayerMovement>();
+        if (pm == null || !pm.onRail) return;
 
+        SnapSideways(other.transform);   
+    }
     private void OnTriggerExit(Collider other)
     {
         var pm = other.GetComponentInParent<PlayerMovement>();
