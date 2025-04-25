@@ -294,7 +294,10 @@ public class clone : MonoBehaviour
         if (playerMovement != null)
             playerMovement.enabled = true;
 
-
+        if (playerMovement != null)
+        {
+            PlayRandomClip(playerMovement.outOfJumpsClips, playerMovement.audioSource);
+        }
 
         if (vcam != null && player != null)
         {

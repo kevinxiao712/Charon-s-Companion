@@ -384,6 +384,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2657565403964499232}
+  - {fileID: 179773653116310222}
   m_Father: {fileID: 868293870326022831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2950221540431207886
@@ -596,12 +597,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8311868751700540077}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -4.73, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 868293870326022831}
+  m_Father: {fileID: 2583741722654376649}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &7141315851312480498
 MonoBehaviour:
@@ -662,7 +663,6 @@ GameObject:
   - component: {fileID: 2691374045678926998}
   - component: {fileID: 701600446644107039}
   - component: {fileID: -6867574566476138215}
-  - component: {fileID: 5916690749328342692}
   m_Layer: 6
   m_Name: player test
   m_TagString: Player
@@ -686,7 +686,6 @@ Transform:
   - {fileID: 2583741722654376649}
   - {fileID: 7938519937827571193}
   - {fileID: 3349985466252087218}
-  - {fileID: 179773653116310222}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6745293927177853395
@@ -773,6 +772,7 @@ MonoBehaviour:
   maxSlopeAngle: 70
   ropeSnapVerticalOffset: 20
   state: 0
+  onRail: 0
   maxJumpCount: 1
   restricted: 0
   freeze: 0
@@ -929,20 +929,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &5916690749328342692
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8710541137338650774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c4358f08cddd334fa10d654ddf68a07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detachKey: 32
-  climbSpeed: 8
 --- !u!1001 &433799837568965635
 PrefabInstance:
   m_ObjectHideFlags: 0
