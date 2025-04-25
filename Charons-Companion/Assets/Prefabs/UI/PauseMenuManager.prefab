@@ -962,6 +962,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6591052691321692325, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6926183184481257505, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
       propertyPath: m_Name
       value: end
@@ -972,7 +976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7422568553905446664, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7422568553905446664, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -984,11 +988,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7422568553905446664, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: QuitGame
+      value: LoadMainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 7422568553905446664, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7422568553905446664, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MainMenuFinished
       objectReference: {fileID: 0}
     - target: {fileID: 7422568553905446664, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1110,6 +1118,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5872478787344997205, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591052691321692325, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6926183184481257505, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
@@ -1256,6 +1268,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5872478787344997205, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591052691321692325, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6926183184481257505, guid: 833c70be06a30ae438d16c0865b70b67, type: 3}
