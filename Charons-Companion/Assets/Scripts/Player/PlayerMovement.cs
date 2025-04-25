@@ -84,7 +84,8 @@ public class PlayerMovement : MonoBehaviour
     public MovementState state;
 
     private MovementState lastGroundedState = MovementState.walking;
-
+    [HideInInspector] public bool onRail = false;
+    private Vector3 railDir = Vector3.forward;
 
     [Header("Jump Count (Double Jump)")]
     public int maxJumpCount = 2;   // Allow 2 jumps: initial jump and one mid-air jump.
@@ -223,6 +224,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void MyInput()
     {
+
+        if (onRail && Input.GetKeyDown(jumpKey))
+        {
+            ExitRail();          // unlock
+            readyToJump = true;  
+                                 
+        }
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
         bool isMovingInput = (Mathf.Abs(horizontalInput) > 0.01f || Mathf.Abs(verticalInput) > 0.01f);
@@ -295,7 +303,17 @@ public class PlayerMovement : MonoBehaviour
         if (restricted) return;
 
 
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        if (onRail)
+        {
+
+            float fwd = Input.GetAxisRaw("Vertical");
+            moveDirection = railDir * fwd;
+
+        }
+        else
+        {
+            moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        }
 
 
         // Slope movement
@@ -478,7 +496,16 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
+    public void EnterRail(Vector3 direction)
+    {
+        onRail = true;
+        railDir = direction.normalized;
 
+        // kill sideways velocity so the player doesn¡¯t ¡°slide off¡±
+        rb.linearVelocity = Vector3.Project(rb.linearVelocity, railDir);
+    }
+
+    public void ExitRail() => onRail = false;
 
 
 }

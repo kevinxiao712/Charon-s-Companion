@@ -662,6 +662,7 @@ GameObject:
   - component: {fileID: 2691374045678926998}
   - component: {fileID: 701600446644107039}
   - component: {fileID: -6867574566476138215}
+  - component: {fileID: 5916690749328342692}
   m_Layer: 6
   m_Name: player test
   m_TagString: Player
@@ -767,7 +768,10 @@ MonoBehaviour:
   fallMultiplier: 12
   fallVelocityThreshold: -15
   stunDuration: 1
+  groundJumpForce: 10
+  airJumpForce: 7
   maxSlopeAngle: 70
+  ropeSnapVerticalOffset: 20
   state: 0
   maxJumpCount: 1
   restricted: 0
@@ -925,6 +929,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5916690749328342692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8710541137338650774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4358f08cddd334fa10d654ddf68a07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detachKey: 32
+  climbSpeed: 8
 --- !u!1001 &433799837568965635
 PrefabInstance:
   m_ObjectHideFlags: 0
