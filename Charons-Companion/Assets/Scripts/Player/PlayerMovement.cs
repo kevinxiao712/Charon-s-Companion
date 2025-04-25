@@ -491,7 +491,7 @@ public class PlayerMovement : MonoBehaviour
         coyoteTimeCounter = 0f;
         jumpCount++;
 
-        NormalJump();                  // vertical impulse (and sprint boost if needed)
+        NormalJump();               
         Invoke(nameof(ResetJump), jumpCooldown);
     }
 
@@ -500,12 +500,16 @@ public class PlayerMovement : MonoBehaviour
     {
         onRail = true;
         railDir = direction.normalized;
-
+        rb.useGravity = false;
         // kill sideways velocity so the player doesn¡¯t ¡°slide off¡±
         rb.linearVelocity = Vector3.Project(rb.linearVelocity, railDir);
     }
 
-    public void ExitRail() => onRail = false;
+    public void ExitRail()
+    {
+        onRail = false;
+        rb.useGravity = true;                 
+    }
 
 
 }
