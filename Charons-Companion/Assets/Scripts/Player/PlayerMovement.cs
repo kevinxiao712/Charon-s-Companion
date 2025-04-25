@@ -79,13 +79,19 @@ public class PlayerMovement : MonoBehaviour
     private RaycastHit slopHit;
     private bool exitingSlope;
     private bool isJumping;
-    [SerializeField] private float ropeSnapVerticalOffset = 20f;
     Rigidbody rb;
     public MovementState state;
 
     private MovementState lastGroundedState = MovementState.walking;
-    [HideInInspector] public bool onRail = false;
-    private Vector3 railDir = Vector3.forward;
+
+
+
+
+
+    private bool onRail = false;
+    private Vector3 railOrigin = Vector3.zero;
+    private Vector3 railDir = Vector3.right;
+    public float railMoveSpeed = 6f;
 
     [Header("Jump Count (Double Jump)")]
     public int maxJumpCount = 2;   // Allow 2 jumps: initial jump and one mid-air jump.
@@ -107,7 +113,16 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (onRail)
+        {
+            SnapToRail();
 
+            float input = Input.GetAxisRaw("Vertical");   // W/S or stick up/down
+            Vector3 climbVel = railDir * input * railMoveSpeed;
+            rb.linearVelocity = climbVel;
+
+            return;                                       // skip all other movement
+        }
         MovePlayer();
         if (!grounded && !OnSlope() && rb.linearVelocity.y < 0)
         {
@@ -496,19 +511,31 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void EnterRail(Vector3 direction)
+    public void EnterRail(Vector3 origin, Vector3 direction)
     {
         onRail = true;
+        railOrigin = origin;
         railDir = direction.normalized;
+
         rb.useGravity = false;
-        // kill sideways velocity so the player doesn¡¯t ¡°slide off¡±
-        rb.linearVelocity = Vector3.Project(rb.linearVelocity, railDir);
+        rb.linearVelocity = Vector3.zero;             // start from rest
+        SnapToRail();                                 // centre immediately
     }
 
     public void ExitRail()
     {
         onRail = false;
-        rb.useGravity = true;                 
+        rb.useGravity = true;
+    }
+
+    private void SnapToRail()
+    {
+        // Closest point on infinite line
+        Vector3 toPlayer = transform.position - railOrigin;
+        float t = Vector3.Dot(toPlayer, railDir);
+        Vector3 locked = railOrigin + railDir * t;
+
+        rb.MovePosition(locked);                      // one-step teleport, stable
     }
 
 

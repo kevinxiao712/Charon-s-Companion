@@ -96,4 +96,17 @@ public class PauseMenu : MonoBehaviour
                                       : CursorLockMode.None;
         Cursor.visible = !lockCursor;
     }
+
+    public void LoadMainMenu(string menuSceneName = "Main Menu Finished")
+    {
+        Time.timeScale = 1f;
+
+        if (pauseAudio) AudioListener.pause = false;
+
+        SetCursorLock(false);
+
+        ToggleScripts(true);
+
+        SceneManager.LoadScene(menuSceneName);
+    }
 }
