@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3764109827743131904, guid: 3e9048c7ca2645d47a6d19602a5c862c, type: 3}
       propertyPath: m_Name
-      value: Particle System Variant
+      value: Particles_for_Platforms
       objectReference: {fileID: 0}
     - target: {fileID: 5523116118279375845, guid: 3e9048c7ca2645d47a6d19602a5c862c, type: 3}
       propertyPath: lengthInSec
@@ -65,6 +65,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5523116118279375845, guid: 3e9048c7ca2645d47a6d19602a5c862c, type: 3}
+      propertyPath: LightsModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5523116118279375845, guid: 3e9048c7ca2645d47a6d19602a5c862c, type: 3}
       propertyPath: ShapeModule.radius.value
       value: 1.92
       objectReference: {fileID: 0}
@@ -75,6 +79,10 @@ PrefabInstance:
     - target: {fileID: 5523116118279375845, guid: 3e9048c7ca2645d47a6d19602a5c862c, type: 3}
       propertyPath: InitialModule.startSize.scalar
       value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 5523116118279375845, guid: 3e9048c7ca2645d47a6d19602a5c862c, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 33.68
       objectReference: {fileID: 0}
     - target: {fileID: 5523116118279375845, guid: 3e9048c7ca2645d47a6d19602a5c862c, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
