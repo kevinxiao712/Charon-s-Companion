@@ -147,14 +147,14 @@ RectTransform:
   m_GameObject: {fileID: 382965281}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1.2558168}
-  m_LocalScale: {x: 2.733531, y: 5.318925, z: 2.57038}
+  m_LocalScale: {x: 0.5013894, y: 2.5845404, z: 2.57038}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 878318668}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.06065, y: -364}
+  m_AnchoredPosition: {x: 738.7, y: 238.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &382965283
@@ -201,9 +201,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 671485822}
-        m_TargetAssemblyTypeName: SiimpleSceneManager, Assembly-CSharp
-        m_MethodName: QuitGame
+      - m_Target: {fileID: 671485824}
+        m_TargetAssemblyTypeName: EndScreen, Assembly-CSharp
+        m_MethodName: BackToEndScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 671485823}
-  - component: {fileID: 671485822}
+  - component: {fileID: 671485824}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -343,19 +343,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &671485822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 671485821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d19215ed64341154e9f2936f046b3e7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imagePanel: {fileID: 0}
 --- !u!4 &671485823
 Transform:
   m_ObjectHideFlags: 0
@@ -371,6 +358,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &671485824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671485821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7efa38811b187cd4da2038949863a6eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &814485578
 GameObject:
   m_ObjectHideFlags: 0
