@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class SoulTest : MonoBehaviour, IInteractable
 {
-    public Dialogue dialogue; 
+    public Dialogue dialogue;
+    private bool hasTriggeredDialogue = false; 
 
     public void Interact()
     {
@@ -22,24 +23,24 @@ public class SoulTest : MonoBehaviour, IInteractable
         }
     }
 
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasTriggeredDialogue) 
         {
             Debug.Log("Player entered Soul trigger");
+            hasTriggeredDialogue = true; 
             Interact();
         }
     }

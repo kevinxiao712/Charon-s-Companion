@@ -12,12 +12,15 @@ public class Dialogue : MonoBehaviour
     public float typingSpeed;
 
     private int index;
+    public GameObject player;
+    private PlayerMovement playerMovement;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         textDisplay.text = string.Empty;
         gameObject.SetActive(false);
+        playerMovement = player.GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -42,6 +45,10 @@ public class Dialogue : MonoBehaviour
     {
         Debug.Log("Dialogue started!");
         gameObject.SetActive(true);
+
+        if (playerMovement != null)
+            playerMovement.enabled = false;
+
         index = 0;
         textDisplay.text = string.Empty;
         StartCoroutine(TypeLine());
@@ -66,7 +73,9 @@ public class Dialogue : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false); 
+            gameObject.SetActive(false);
+            if (playerMovement != null)
+                playerMovement.enabled = true;
         }
     }
 
